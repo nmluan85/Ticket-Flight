@@ -14,7 +14,8 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/button_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck">
     </ImageButton>
 
     <ImageView
@@ -28,54 +29,158 @@
         app:layout_constraintTop_toTopOf="parent">
     </ImageView>
 
-    <ImageView
+    <EditText
         android:id="@+id/edit_text_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="328dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/sign_in_edittext"
+        android:hint="@string/email"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </ImageView>
-
-    <EditText
-        android:id="@+id/edit_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:textSize="20sp"
-        android:background="@null"
-        android:fontFamily="@font/poppins_regular"
-        android:text="@string/email"
-        android:textColor="@color/dim_text_color"
-        app:layout_constraintStart_toStartOf="@+id/edit_text_email"
-        app:layout_constraintTop_toTopOf="@+id/edit_text_email">
+        app:layout_constraintTop_toBottomOf="@+id/signin_text">
     </EditText>
 
-    <ImageView
+    <EditText
         android:id="@+id/edit_text_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="420dp"
         android:background="@drawable/sign_in_edittext"
+        android:layout_marginTop="10dp"
+        android:hint="@string/password"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </ImageView>
-    <EditText
-        android:id="@+id/edit_password"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_email">
+    </EditText>
+
+    <ImageButton
+        android:id="@+id/button_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_signin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_password"
+        tools:ignore="SpeakableTextPresentCheck">
+    </ImageButton>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/create_new"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_sign_in">
+    </TextView>
+
+    <TextView
+        android:id="@+id/text_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
         android:layout_marginTop="15dp"
-        android:text="@string/password"
-        android:textSize="20sp"
-        android:fontFamily="@font/poppins_regular"
-        android:textColor="@color/dim_text_color"
-        android:background="@null"
-        app:layout_constraintStart_toStartOf="@+id/edit_text_password"
-        app:layout_constraintTop_toTopOf="@+id/edit_text_password">
-    </EditText>
+        android:fontFamily="@font/poppins_bold"
+        android:minHeight="48dp"
+        android:onClick="OnTextViewClick"
+        android:text="@string/sign_up"
+        android:textColor="@color/moss_green"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/button_sign_in">
+    </TextView>
+
+    <TextView
+        android:id="@+id/text_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/forgot_password"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/text_sign_up"
+        app:layout_constraintTop_toBottomOf="@+id/button_sign_in">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:src="@drawable/divider"
+        app:layout_constraintTop_toBottomOf="@+id/button_sign_in"
+        tools:layout_editor_absoluteX="0dp">
+    </ImageView>
+
+    <ImageButton
+        android:id="@+id/button_facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/social_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:ignore="SpeakableTextPresentCheck">
+    </ImageButton>
+    <ImageView
+        android:id="@+id/icon_facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/facebook"
+        app:layout_constraintStart_toStartOf="@+id/button_facebook"
+        app:layout_constraintTop_toTopOf="@+id/button_facebook">
+    </ImageView>
+
+    <ImageButton
+        android:id="@+id/button_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/social_button"
+        app:layout_constraintStart_toEndOf="@+id/button_facebook"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:ignore="SpeakableTextPresentCheck">
+    </ImageButton>
+    <ImageView
+        android:id="@+id/icon_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/google"
+        app:layout_constraintStart_toStartOf="@+id/button_google"
+        app:layout_constraintTop_toTopOf="@+id/button_google">
+    </ImageView>
+
+    <ImageButton
+        android:id="@+id/button_apple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/social_button"
+        app:layout_constraintStart_toEndOf="@+id/button_google"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:ignore="SpeakableTextPresentCheck">
+    </ImageButton>
+    <ImageView
+        android:id="@+id/icon_apple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/apple"
+        app:layout_constraintStart_toStartOf="@+id/button_apple"
+        app:layout_constraintTop_toTopOf="@+id/button_apple">
+    </ImageView>
 </androidx.constraintlayout.widget.ConstraintLayout>

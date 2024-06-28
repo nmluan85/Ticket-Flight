@@ -29,6 +29,10 @@
             android:name=".Welcome"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".SignIn"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

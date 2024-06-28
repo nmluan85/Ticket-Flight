@@ -5,4 +5,6 @@
     <color name="mainColor">#02635D</color>
     <color name="white_background">#F5F5F5</color>
     <color name="dim_text_color">#A9A9A9</color>
+    <color name="transparent">#00000000</color>
+    <color name="moss_green">#0C615B</color>
 </resources>
