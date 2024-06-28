@@ -5,4 +5,19 @@
     <string name="create_new">New?</string>
     <string name="sign_up">Sign Up</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="title_home">Explore the beautiful world!</string>
+    <string name="search_bar">Search</string>
+    <string name="booking_service">Booking Services</string>
+    <string name="trips">Trips</string>
+    <string name="hotel">Hotel</string>
+    <string name="transport">Transport</string>
+    <string name="events">Events</string>
+    <string name="notification">Notification            </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="home_fragment">Home Fragment</string>
+    <string name="booking_fragment">Booking Fragment</string>
+    <string name="notification_fragment">Notification Fragment</string>
+    <string name="account_fragment">Account Fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

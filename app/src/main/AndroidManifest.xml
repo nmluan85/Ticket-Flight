@@ -33,6 +33,10 @@
             android:name=".SignIn"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".Home"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

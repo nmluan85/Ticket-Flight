@@ -62,8 +62,8 @@ public class SignIn extends AppCompatActivity {
                     Toast.makeText(SignIn.this,"Please enter email and password", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    //Checking the email and password;
-                    //Next activity
+                    Intent home = new Intent(SignIn.this, Home.class);
+                    startActivity(home);
                 }
             }
         });
