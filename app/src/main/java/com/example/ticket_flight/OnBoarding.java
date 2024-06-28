@@ -70,21 +70,18 @@ public class OnBoarding extends AppCompatActivity{
             }
         });
     }
-
     private void animateTrasaction(final int currentPage) {
-        illustration.animate().translationX(-illustration.getWidth()).alpha(0).setDuration(300).start();
-        button_next.animate().translationX(-button_next.getWidth()).alpha(0).setDuration(300).withEndAction(new Runnable() {
+        illustration.animate().translationX(-illustration.getWidth()).alpha(0).setDuration(timeFade).start();
+        button_next.animate().alpha(0).setDuration(timeFade).withEndAction(new Runnable() {
             @Override
             public void run() {
                 updatePage(currentPage);
                 illustration.setTranslationX(illustration.getWidth());
-                illustration.animate().translationX(0).alpha(1).setDuration(300).start();
-                button_next.setTranslationX(button_next.getWidth());
-                button_next.animate().translationX(0).alpha(1).setDuration(300).start();
+                illustration.animate().translationX(0).alpha(1).setDuration(timeFade).start();
+                button_next.animate().alpha(1).setDuration(timeFade).start();
             }
         }).start();
     }
-
     private void updatePage(int currentPage) {
         slider.setImageResource(imageResourceSlider.get(currentPage));
         illustration.setImageResource(imageResourceIllustration.get(currentPage));
