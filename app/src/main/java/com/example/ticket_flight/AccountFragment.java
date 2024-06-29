@@ -29,8 +29,11 @@ public class AccountFragment extends Fragment{
     private static final String ARG_PARAM5 = "param5";
 
     // TODO: Rename and change types of parameters
-    private String first_name, last_name, phone, email;
-    private Integer id_image;
+    private String first_name = "Luan";
+    private String last_name = "Nguyen";
+    private String phone = "0987654321";
+    private String email = "luan@gmail.com";
+    private Integer id_image = R.drawable.avatar;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -65,11 +68,14 @@ public class AccountFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
+        TextView name = view.findViewById(R.id.name_account);
         TextView info = view.findViewById(R.id.text_personal);
         TextView payment = view.findViewById(R.id.text_payment);
         TextView saved = view.findViewById(R.id.text_saved);
         TextView settings = view.findViewById(R.id.text_settings);
         ImageButton exit = view.findViewById(R.id.button_end_session);
+
+        name.setText(first_name + " " + last_name);
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,14 +87,15 @@ public class AccountFragment extends Fragment{
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(EditProfileFragment.newInstance(first_name, last_name, phone, email, id_image));
+                EditProfileFragment editProfileFragment = EditProfileFragment
+                        .newInstance(first_name, last_name, phone, email, id_image);
+                getChildFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer_Account, editProfileFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         return view;
-    }
-    private void loadFragment(Fragment fragment) {
-        getChildFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer_Account, fragment)
-                .commit();
     }
 }

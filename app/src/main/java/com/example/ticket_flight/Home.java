@@ -90,8 +90,8 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (selectedTab != 3){
-
-                    loadFragment(new NotificationFragment());
+                    NotificationFragment notificationFragment = new NotificationFragment();
+                    loadFragment(notificationFragment);
 
                     bookingText.setVisibility(View.GONE);
                     homeText.setVisibility(View.GONE);
@@ -112,8 +112,8 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (selectedTab != 4){
-
-                    loadFragment(new AccountFragment());
+                    AccountFragment accountFragment = new AccountFragment();
+                    loadFragment(accountFragment);
 
                     bookingText.setVisibility(View.GONE);
                     notificationText.setVisibility(View.GONE);
@@ -134,6 +134,7 @@ public class Home extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 }
