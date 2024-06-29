@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ConstraintLayout constraintLayout;
     private Handler handler = new Handler();
-    static int delayTime = 5000;
+    static int delayTime = 2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

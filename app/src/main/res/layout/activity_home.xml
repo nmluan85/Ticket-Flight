@@ -5,15 +5,6 @@
     android:background="@color/white_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.example.ticket_flight.HomeFragment"
-        tools:layout="@layout/fragment_home"/>
-    <include
-        android:id="@+id/include_layout"
-        layout="@layout/bottom_navigation"/>
     <TextView
         android:id="@+id/title_home"
         android:layout_width="wrap_content"
@@ -205,4 +196,16 @@
         android:text="@string/events"
         app:layout_constraintStart_toEndOf="@+id/text_transport"
         app:layout_constraintTop_toBottomOf="@+id/button_events"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <include
+        android:id="@+id/include_layout"
+        layout="@layout/bottom_navigation"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

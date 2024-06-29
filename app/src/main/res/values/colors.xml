@@ -7,4 +7,6 @@
     <color name="dim_text_color">#A9A9A9</color>
     <color name="transparent">#00000000</color>
     <color name="moss_green">#0C615B</color>
+    <color name="red">#FF3534</color>
+    <color name="grey">#6C6C6C</color>
 </resources>

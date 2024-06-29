@@ -13,6 +13,21 @@
     <string name="transport">Transport</string>
     <string name="events">Events</string>
     <string name="notification">Notification            </string>
+    <string name="account">Account</string>
+    <string name="name_account">Nguyen Minh Luan</string>
+    <string name="personal">Personal information</string>
+    <string name="saved">Saved</string>
+    <string name="payment">Payment and cards</string>
+    <string name="history">Booking history</string>
+    <string name="settings">Settings</string>
+    <string name="end_session">End session</string>
+    <string name="edit_profile">Personal Information</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone">Phone</string>
+    <string name="save_changes">Save changes</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="home_fragment">Home Fragment</string>
     <string name="booking_fragment">Booking Fragment</string>

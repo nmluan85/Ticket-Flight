@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfileFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/white_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/button_back_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_back"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/title_edit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_profile"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/image_Account"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_rectangle"
+            android:src="@drawable/avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_edit_profile" />
+
+        <ImageButton
+            android:id="@+id/edit_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/photo"
+            app:layout_constraintBottom_toBottomOf="@+id/image_Account"
+            app:layout_constraintEnd_toEndOf="@+id/image_Account"/>
+
+        <LinearLayout
+            android:id="@+id/layout_first_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sign_in_edittext"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_Account">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="15dp"
+                android:paddingTop="3dp"
+                android:text="@string/first_name"
+                android:textColor="@color/grey"
+                android:textSize="12sp"/>
+            <EditText
+                android:id="@+id/edit_first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/sign_in_edittext"
+                android:paddingLeft="15dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_last_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sign_in_edittext"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_first_name">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="15dp"
+                android:paddingTop="3dp"
+                android:text="@string/last_name"
+                android:textColor="@color/grey"
+                android:textSize="12sp"/>
+            <EditText
+                android:id="@+id/edit_last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/sign_in_edittext"
+                android:paddingLeft="15dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sign_in_edittext"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_last_name">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="15dp"
+                android:paddingTop="3dp"
+                android:text="@string/phone"
+                android:textColor="@color/grey"
+                android:textSize="12sp"/>
+            <EditText
+                android:id="@+id/edit_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/sign_in_edittext"
+                android:paddingLeft="15dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sign_in_edittext"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_phone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="15dp"
+                android:paddingTop="3dp"
+                android:text="@string/email"
+                android:textColor="@color/grey"
+                android:textSize="12sp"/>
+            <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/sign_in_edittext"
+                android:paddingLeft="15dp" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/button_save_changes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="580dp"
+            android:background="@drawable/button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_changes"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_extrabold"
+            app:layout_constraintBottom_toBottomOf="@+id/button_save_changes"
+            app:layout_constraintEnd_toEndOf="@+id/button_save_changes"
+            app:layout_constraintStart_toStartOf="@+id/button_save_changes"
+            app:layout_constraintTop_toTopOf="@+id/button_save_changes"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

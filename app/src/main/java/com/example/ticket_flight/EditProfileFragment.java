@@ -1,26 +1,21 @@
 package com.example.ticket_flight;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
-import androidx.fragment.app.Fragment;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AccountFragment#newInstance} factory method to
+ * Use the {@link EditProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccountFragment extends Fragment{
-
-
+public class EditProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -32,17 +27,17 @@ public class AccountFragment extends Fragment{
     private String first_name, last_name, phone, email;
     private Integer id_image;
 
-    public AccountFragment() {
+    public EditProfileFragment() {
         // Required empty public constructor
     }
-    public static AccountFragment newInstance(String param1, String param2, String param3, String param4, Integer param5) {
-        AccountFragment fragment = new AccountFragment();
+    public static EditProfileFragment newInstance(String param1, String param2, String param3, String param4, Integer id_image) {
+        EditProfileFragment fragment = new EditProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         args.putString(ARG_PARAM3, param3);
         args.putString(ARG_PARAM4, param4);
-        args.putInt(ARG_PARAM5, param5);
+        args.putInt(ARG_PARAM5, id_image);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,38 +52,41 @@ public class AccountFragment extends Fragment{
             email = getArguments().getString(ARG_PARAM4);
             id_image = getArguments().getInt(ARG_PARAM5);
         }
-        
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_account, container, false);
-        TextView info = view.findViewById(R.id.text_personal);
-        TextView payment = view.findViewById(R.id.text_payment);
-        TextView saved = view.findViewById(R.id.text_saved);
-        TextView settings = view.findViewById(R.id.text_settings);
-        ImageButton exit = view.findViewById(R.id.button_end_session);
+        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        EditText edit_first_name = view.findViewById(R.id.edit_first_name);
+        EditText edit_last_name = view.findViewById(R.id.edit_last_name);
+        EditText edit_phone = view.findViewById(R.id.edit_phone);
+        EditText edit_email = view.findViewById(R.id.edit_email);
 
-        exit.setOnClickListener(new View.OnClickListener() {
+        edit_first_name.setText(first_name);
+        edit_last_name.setText(last_name);
+        edit_phone.setText(phone);
+        edit_email.setText(email);
+
+        ImageButton back = view.findViewById(R.id.button_back_account);
+        ImageButton save = view.findViewById(R.id.button_save_changes);
+
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SignIn.class);
-                startActivity(intent);
+
             }
         });
-        info.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(EditProfileFragment.newInstance(first_name, last_name, phone, email, id_image));
+                first_name = edit_first_name.getText().toString();
+                last_name = edit_last_name.getText().toString();
+                phone = edit_phone.getText().toString();
+                email = edit_email.getText().toString();
             }
         });
         return view;
-    }
-    private void loadFragment(Fragment fragment) {
-        getChildFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer_Account, fragment)
-                .commit();
     }
 }

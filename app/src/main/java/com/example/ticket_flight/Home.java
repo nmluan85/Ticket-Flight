@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import androidx.fragment.app.Fragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,19 +39,15 @@ public class Home extends AppCompatActivity {
         homeText.setVisibility(View.VISIBLE);
         homeLayout.setBackgroundResource(R.drawable.active);
 
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.fragmentContainer, HomeFragment.class, null)
-                .commit();
+        if (savedInstanceState == null) {
+            loadFragment(new HomeFragment());
+        }
         homeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (selectedTab != 1){
 
-                    getSupportFragmentManager().beginTransaction()
-                            .setReorderingAllowed(true)
-                            .replace(R.id.fragmentContainer, HomeFragment.class, null)
-                            .commit();
+                    loadFragment(new HomeFragment());
 
                     bookingText.setVisibility(View.GONE);
                     notificationText.setVisibility(View.GONE);
@@ -63,11 +60,6 @@ public class Home extends AppCompatActivity {
                     homeText.setVisibility(View.VISIBLE);
                     homeLayout.setBackgroundResource(R.drawable.active);
 
-                    /*ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f, 1.0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
-                    scaleAnimation.setDuration(200);
-                    scaleAnimation.setFillAfter(true);
-                    homeLayout.startAnimation(scaleAnimation);*/
-
                     selectedTab = 1;
                 }
             }
@@ -77,10 +69,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectedTab != 2){
 
-                    getSupportFragmentManager().beginTransaction()
-                            .setReorderingAllowed(true)
-                            .replace(R.id.fragmentContainer, BookingFragment.class, null)
-                            .commit();
+                    loadFragment(new BookingFragment());
 
                     homeText.setVisibility(View.GONE);
                     notificationText.setVisibility(View.GONE);
@@ -93,11 +82,6 @@ public class Home extends AppCompatActivity {
                     bookingText.setVisibility(View.VISIBLE);
                     bookingLayout.setBackgroundResource(R.drawable.active);
 
-                   /* ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f, 1.0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
-                    scaleAnimation.setDuration(200);
-                    scaleAnimation.setFillAfter(true);
-                    bookingLayout.startAnimation(scaleAnimation);*/
-
                     selectedTab = 2;
                 }
             }
@@ -107,10 +91,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectedTab != 3){
 
-                    getSupportFragmentManager().beginTransaction()
-                            .setReorderingAllowed(true)
-                            .replace(R.id.fragmentContainer, NotificationFragment.class, null)
-                            .commit();
+                    loadFragment(new NotificationFragment());
 
                     bookingText.setVisibility(View.GONE);
                     homeText.setVisibility(View.GONE);
@@ -123,11 +104,6 @@ public class Home extends AppCompatActivity {
                     notificationText.setVisibility(View.VISIBLE);
                     notificationLayout.setBackgroundResource(R.drawable.active);
 
-                   /* ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f, 1.0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
-                    scaleAnimation.setDuration(200);
-                    scaleAnimation.setFillAfter(true);
-                    notificationLayout.startAnimation(scaleAnimation);*/
-
                     selectedTab = 3;
                 }
             }
@@ -137,10 +113,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectedTab != 4){
 
-                    getSupportFragmentManager().beginTransaction()
-                            .setReorderingAllowed(true)
-                            .replace(R.id.fragmentContainer, AccountFragment.class, null)
-                            .commit();
+                    loadFragment(new AccountFragment());
 
                     bookingText.setVisibility(View.GONE);
                     notificationText.setVisibility(View.GONE);
@@ -153,15 +126,14 @@ public class Home extends AppCompatActivity {
                     accountText.setVisibility(View.VISIBLE);
                     accountLayout.setBackgroundResource(R.drawable.active);
 
-                    /*ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f, 1.0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
-                    scaleAnimation.setDuration(200);
-                    scaleAnimation.setFillAfter(true);
-                    accountLayout.startAnimation(scaleAnimation);*/
-
                     selectedTab = 4;
                 }
             }
         });
     }
-
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit();
+    }
 }
