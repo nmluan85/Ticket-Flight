@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,7 +64,6 @@ public class AccountFragment extends Fragment{
         }
         
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class AccountFragment extends Fragment{
         TextView payment = view.findViewById(R.id.text_payment);
         TextView saved = view.findViewById(R.id.text_saved);
         TextView settings = view.findViewById(R.id.text_settings);
+        ImageView image_account = view.findViewById(R.id.image_Account);
         ImageButton exit = view.findViewById(R.id.button_end_session);
 
         name.setText(first_name + " " + last_name);
@@ -89,12 +91,34 @@ public class AccountFragment extends Fragment{
             public void onClick(View v) {
                 EditProfileFragment editProfileFragment = EditProfileFragment
                         .newInstance(first_name, last_name, phone, email, id_image);
+                editProfileFragment.setOnFragmentInteractionListener(new EditProfileFragment.OnFragmentInteractionListener() {
+                    @Override
+                    public void onFragmentBack() {
+                        getChildFragmentManager()
+                                .beginTransaction()
+                                .remove(editProfileFragment)
+                                .commit();
+                    }
+                    @Override
+                    public void onFragmentSaveChanges() {
+                        String[] information = editProfileFragment.getInformation();
+                        first_name = information[0];
+                        last_name = information[1];
+                        phone = information[2];
+                        email = information[3];
+                        id_image = Integer.parseInt(information[4]);
+
+                        name.setText(first_name + " " + last_name);
+                        image_account.setImageResource(id_image);
+
+                        onFragmentBack();
+                    }
+                });
                 getChildFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragmentContainer_Account, editProfileFragment)
-                        .addToBackStack(null)
-                        .commit();
+                        .replace(R.id.fragmentContainer_Account, editProfileFragment).commit();
             }
+
         });
         return view;
     }

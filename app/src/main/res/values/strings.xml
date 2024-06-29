@@ -26,13 +26,17 @@
     <string name="last_name">Last Name</string>
     <string name="phone">Phone</string>
     <string name="save_changes">Save changes</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="departure">Departure</string>
+    <string name="returndate">Return</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="home_fragment">Home Fragment</string>
-    <string name="booking_fragment">Booking Fragment</string>
+    <string name="booking_fragment">Booking</string>
     <string name="notification_fragment">Notification Fragment</string>
     <string name="account_fragment">Account Fragment</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="transport_booking">Transport Booking</string>
 </resources>

@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_navigation_bar"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@color/transparent"
     xmlns:tool="http://schemas.android.com/tools">
 
@@ -12,13 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="-1dp"
         android:background="@drawable/tab_bar_nev"
         android:elevation="10dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingStart="20dp"
-
         android:paddingTop="30dp"
         android:paddingEnd="20dp"
         android:paddingBottom="10dp"

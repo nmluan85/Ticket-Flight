@@ -46,8 +46,8 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (selectedTab != 1){
-
-                    loadFragment(new HomeFragment());
+                    HomeFragment homeFragment = new HomeFragment();
+                    loadFragment(homeFragment);
 
                     bookingText.setVisibility(View.GONE);
                     notificationText.setVisibility(View.GONE);
@@ -68,8 +68,8 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (selectedTab != 2){
-
-                    loadFragment(new BookingFragment());
+                    BookingFragment bookingFragment = new BookingFragment();
+                    loadFragment(bookingFragment);
 
                     homeText.setVisibility(View.GONE);
                     notificationText.setVisibility(View.GONE);
