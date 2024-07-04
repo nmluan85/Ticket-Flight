@@ -9,4 +9,6 @@
     <color name="moss_green">#0C615B</color>
     <color name="red">#FF3534</color>
     <color name="grey">#6C6C6C</color>
+    <color name="color_icon">#01635D</color>
+    <color name="booking_picker">#098F82</color>
 </resources>

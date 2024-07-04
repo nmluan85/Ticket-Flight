@@ -35,6 +35,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
         holder.booking_item.setImageResource(booking.getId_item());
         holder.name_booking.setText(booking.getName_item());
     }
+    @Override
     public int getItemCount() {
         return bookingList.size();
     }
@@ -47,7 +48,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
             booking_item = itemView.findViewById(R.id.booking_service);
             name_booking = itemView.findViewById(R.id.name_booking_service);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            booking_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null){

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,13 +84,89 @@ public class BookingFragment extends Fragment {
                 BookingItem bookingItem = bookingItems.get(position);
                 switch (bookingItem.getName_item()) {
                     case "Hotel":
-
+                        HotelBookingFragment hotelBookingFragment = new HotelBookingFragment();
+                        hotelBookingFragment.setOnFragmentInteractionListener(new HotelBookingFragment.OnFragmentInteractionListener() {
+                            @Override
+                            public void onFragmentBack() {
+                                getChildFragmentManager()
+                                        .beginTransaction()
+                                        .remove(hotelBookingFragment)
+                                        .commit();
+                            }
+                            @Override
+                            public void onFragmentSaveChanges() {
+                            }
+                        });
+                        getChildFragmentManager()
+                                .beginTransaction()
+                                .addToBackStack(null)
+                                .replace(R.id.fragmentContainer_Booking, hotelBookingFragment)
+                                .commit();
+                        break;
                     case "Trips":
+                        TripsBookingFragment tripsBookingFragment = new TripsBookingFragment();
+                        tripsBookingFragment.setOnFragmentInteractionListener(new TripsBookingFragment.OnFragmentInteractionListener() {
+                            @Override
+                            public void onFragmentBack() {
+                                getChildFragmentManager()
+                                        .beginTransaction()
+                                        .remove(tripsBookingFragment)
+                                        .commit();
+                            }
+                            @Override
+                            public void onFragmentSaveChanges() {
+                            }
+                        });
+                        getChildFragmentManager()
+                                .beginTransaction()
+                                .addToBackStack(null)
+                                .replace(R.id.fragmentContainer_Booking, tripsBookingFragment)
+                                .commit();
+                        break;
                     case "Transport":
+                        TransportBookingFragment transportBookingFragment = new TransportBookingFragment();
+                        transportBookingFragment.setOnFragmentInteractionListener(new TransportBookingFragment.OnFragmentInteractionListener() {
+                            @Override
+                            public void onFragmentBack() {
+                                getChildFragmentManager()
+                                        .beginTransaction()
+                                        .remove(transportBookingFragment)
+                                        .commit();
+                            }
+                            @Override
+                            public void onFragmentSaveChanges() {
+
+                            }
+                        });
+                        getChildFragmentManager()
+                                .beginTransaction()
+                                .addToBackStack(null)
+                                .replace(R.id.fragmentContainer_Booking, transportBookingFragment)
+                                .commit();
+
+                        break;
                     case "Events":
+                        EventsBookingFragment eventsBookingFragment = new EventsBookingFragment();
+                        eventsBookingFragment.setOnFragmentInteractionListener(new EventsBookingFragment.OnFragmentInteractionListener() {
+                            @Override
+                            public void onFragmentBack() {
+                                getChildFragmentManager()
+                                        .beginTransaction()
+                                        .remove(eventsBookingFragment)
+                                        .commit();
+                            }
+                            @Override
+                            public void onFragmentSaveChanges() {
+                            }
+                        });
+                        getChildFragmentManager()
+                                .beginTransaction()
+                                .addToBackStack(null)
+                                .replace(R.id.fragmentContainer_Booking, eventsBookingFragment)
+                                .commit();
+                        break;
                 }
             }
-
         });
         return view;
     }

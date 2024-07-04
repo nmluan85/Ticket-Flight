@@ -116,9 +116,9 @@ public class AccountFragment extends Fragment{
                 });
                 getChildFragmentManager()
                         .beginTransaction()
+                        .addToBackStack(null)
                         .replace(R.id.fragmentContainer_Account, editProfileFragment).commit();
             }
-
         });
         return view;
     }

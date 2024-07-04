@@ -23,7 +23,8 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="70dp">
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -42,5 +43,9 @@
             </ScrollView>
         </LinearLayout>
     </LinearLayout>
-
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainer_Booking"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.fragment.app.FragmentContainerView>
 </FrameLayout>

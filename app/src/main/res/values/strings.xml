@@ -30,13 +30,30 @@
     <string name="to">To</string>
     <string name="departure">Departure</string>
     <string name="returndate">Return</string>
-
+    <string name="passenger_luggage">Passenger &amp; Luggage</string>
+    <string name="button_class">Class</string>
+    <string name="economy">Economy</string>
+    <string name="business">Business</string>
+    <string name="flight">Flights</string>
+    <string name="number_of_flights">flights avaliable New York to London</string>
+    <string name="from_place_abb">NYC</string>
+    <string name="from_place">New York</string>
+    <string name="to_place_abb">LDN</string>
+    <string name="to_place">London</string>
+    <string name="date">Date</string>
+    <string name="price">Price</string>
+    <string name="number">Number</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="home_fragment">Home Fragment</string>
     <string name="booking_fragment">Booking</string>
+    <string name="hotel_fragment">Hotel Comming soon!</string>
+    <string name="trips_fragment">Trips Comming soon!</string>
+    <string name="events_fragment">Events Comming soon!</string>
     <string name="notification_fragment">Notification Fragment</string>
     <string name="account_fragment">Account Fragment</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="transport_booking">Transport Booking</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

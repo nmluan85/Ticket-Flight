@@ -1,0 +1,13 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+  <path
+      android:pathData="M26.188,10.05L21.987,14L25.987,25L22.987,28L17.013,19.25L13.988,22V25L10.988,28L9.212,22.762L3.987,21L6.987,18H9.987L12.988,15L3.987,9L6.987,6L17.987,10L21.95,5.812L21.862,5.875C22.426,5.311 23.191,4.995 23.987,4.995C24.785,4.995 25.549,5.311 26.112,5.875C26.676,6.438 26.993,7.203 26.993,8C26.993,8.797 26.676,9.561 26.112,10.125L26.188,10.05Z"
+      android:strokeLineJoin="round"
+      android:strokeWidth="2"
+      android:fillColor="#00000000"
+      android:strokeColor="@color/booking_picker"
+      android:strokeLineCap="round"/>
+</vector>
