@@ -179,6 +179,9 @@ public class SelectSeatFragment extends Fragment {
         rowSeatAdapter.setOnItemClickListener(new RowSeatAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                for (int i = 0; i < rowSeatItems.size(); i++){
+                    Log.d("TAG", "onItemClick: " + rowSeatItems.get(i).getStateSeatA_i() + "," + rowSeatItems.get(i).getStateSeatB_i() + "," + rowSeatItems.get(i).getStateSeatC_i() + "," + rowSeatItems.get(i).getStateSeatD_i());
+                }
                 travellerAdapter.notifyDataSetChanged();
                 rowSeatAdapter.notifyDataSetChanged();
                 currentSeat_index = position;
