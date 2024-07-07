@@ -5,6 +5,7 @@
         <item name="android:colorAccent">@color/mainColor</item>
     </style>
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">#6FB0A9</item>
+        <item name="android:headerBackground">@color/moss_green</item>
+        <item name="android:calendarTextColor">#6FB0A9</item>
     </style>
 </resources>
