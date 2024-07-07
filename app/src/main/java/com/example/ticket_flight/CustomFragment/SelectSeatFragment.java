@@ -25,11 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SelectSeatFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SelectSeatFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -66,16 +61,16 @@ public class SelectSeatFragment extends Fragment {
     ////////////////
     private ImageButton back, continue_button;
     private TextView text_your_seat, text_total_price;
-    private RecyclerView recyclerView_traveller;
-    private RecyclerView recyclerView_seat;
     private int currentTraveller, previousTraveller, currentSeat_index;
     private String currentSeatDetail;
     private RowSeatAdapter.SeatType currentSeatType;
     private ConstraintLayout layout_select_seat;
-    List<TravellerItem> travellerItems;
-    List<RowSeatItem> rowSeatItems;
+    private RecyclerView recyclerView_traveller, recyclerView_seat;
+    private List<TravellerItem> travellerItems;
+    private List<RowSeatItem> rowSeatItems;
     private TravellerAdapter travellerAdapter;
     private RowSeatAdapter rowSeatAdapter;
+    private int selectedTravellerPosition = -1;
     public interface OnFragmentInteractionListener {
         void onFragmentBack();
         void onFragmentSaveChanges();
@@ -141,29 +136,25 @@ public class SelectSeatFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_select_seat, container, false);
         layout_select_seat = view.findViewById(R.id.constraint_layout_select_seat);
         recyclerView_traveller = view.findViewById(R.id.recycler_view_traveller);
-        recyclerView_traveller.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView_seat = view.findViewById(R.id.recycler_view_list_seats);
+
         back = view.findViewById(R.id.button_back_seat);
         continue_button = view.findViewById(R.id.button_continue_select_seats);
         text_your_seat = view.findViewById(R.id.text_your_seats);
         text_total_price = view.findViewById(R.id.text_total_price);
 
-        recyclerView_seat = view.findViewById(R.id.recycler_view_list_seats);
-        recyclerView_seat.setLayoutManager(new LinearLayoutManager(getContext()));
-
         travellerItems = generateTravellerItems(Integer.parseInt(numPeo)+ Integer.parseInt(numBaby));
         travellerAdapter = new TravellerAdapter(travellerItems);
-        recyclerView_traveller.setAdapter(travellerAdapter);
 
         rowSeatItems = generateRowSeatItems();
         rowSeatAdapter = new RowSeatAdapter(rowSeatItems, getContext());
-        recyclerView_seat.setAdapter(rowSeatAdapter);
 
         travellerAdapter.setOnItemClickListener(new TravellerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                currentTraveller = position;
+                /*currentTraveller = position;
                 travellerAdapter.notifyDataSetChanged();
-                rowSeatAdapter.notifyDataSetChanged();
+                rowSeatAdapter.updateData(rowSeatItems);
                 if(currentTraveller != previousTraveller){
                     if (currentSeat_index != -1){
                         travellerItems.get(previousTraveller).setIsBooked(2);
@@ -184,20 +175,45 @@ public class SelectSeatFragment extends Fragment {
                     RowSeatItem item_seat = rowSeatItems.get(Integer.parseInt(item.getRowNum()));
                     item_seat.setSeatSelected(item.getColumnName());
                 }
-                displayResult();
+                displayResult();*/
+                selectedTravellerPosition = position;
+
             }
         });
         rowSeatAdapter.setOnItemClickListener(new RowSeatAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                travellerAdapter.notifyDataSetChanged();
+                for (RowSeatItem item : rowSeatItems){
+                    Log.d("TAG", "item:" + item.getRow_i() + ":" +  item.getStateSeatA_i() + ":" + item.getStateSeatB_i() + ":" + item.getStateSeatC_i() + ":" + item.getStateSeatD_i());
+                }
+                /*travellerAdapter.notifyDataSetChanged();
                 rowSeatAdapter.notifyDataSetChanged();
                 currentSeat_index = position;
                 currentSeatType = rowSeatItems.get(position).getSelectedSeatType();
                 currentSeatDetail = "Traveller " + String.valueOf(currentTraveller + 1) + " / " + String.valueOf(currentSeat_index + 1) + currentSeatType.name();
-                text_your_seat.setText(currentSeatDetail);
+                text_your_seat.setText(currentSeatDetail);*/
+                if (selectedTravellerPosition != -1){
+                    RowSeatItem seatItem = rowSeatItems.get(position);
+                    TravellerItem selectedTraveller = travellerItems.get(selectedTravellerPosition);
+
+                    if (seatItem.getSelectedSeatType() != null){
+                        selectedTraveller.setColumnName(seatItem.getSelectedSeatType());
+                        selectedTraveller.setRowNum(String.valueOf(position + 1));
+                        selectedTraveller.setIsBooked(2);
+                        rowSeatItems.get(position).setSeatBooked(seatItem.getSelectedSeatType());
+                        travellerAdapter.notifyItemChanged(selectedTravellerPosition);
+                        rowSeatAdapter.notifyItemChanged(position);
+                        /*travellerItems.set(selectedTravellerPosition, selectedTraveller);*/
+                    }
+                }
             }
         });
+        recyclerView_traveller.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView_traveller.setAdapter(travellerAdapter);
+
+        recyclerView_seat.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView_seat.setAdapter(rowSeatAdapter);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -260,12 +276,6 @@ public class SelectSeatFragment extends Fragment {
         rowSeatItems.add(new RowSeatItem(9, 2, 1, 1, 1));
         rowSeatItems.add(new RowSeatItem(10, 2, 2, 2, 1));
         return rowSeatItems;
-    }
-    private void displayResult(){
-        for (int i = 0; i < travellerItems.size(); i++){
-            Log.d("TAG", "traveller: " + i);
-            Log.d("TAG", "isBooked: " + travellerItems.get(i).getRowNum() + travellerItems.get(i).getColumnName());
-        }
     }
     private List<TravellerItem> generateTravellerItems(int length){
         List<TravellerItem> travellerItems = new ArrayList<>();

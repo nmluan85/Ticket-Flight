@@ -48,7 +48,7 @@ public class RowSeatAdapter extends RecyclerView.Adapter<RowSeatAdapter.RowSeatV
         updateStateSeat(holder.button_seat_Ai, item.getStateSeatA_i(), position == selectedPosition && selectedSeatType == SeatType.A);
         updateStateSeat(holder.button_seat_Bi, item.getStateSeatB_i(), position == selectedPosition && selectedSeatType == SeatType.B);
         updateStateSeat(holder.button_seat_Ci, item.getStateSeatC_i(), position == selectedPosition && selectedSeatType == SeatType.C);
-        updateStateSeat(holder.button_seat_Di, item.getStateSeatD_i(), position == selectedPosition && selectedSeatType == SeatType.D);
+        updateStateSeat(holder.button_seat_Di, item.getStateSeatD_i(), position == selectedPosition && selectedSeatType == SeatType.A);
     }
     public enum SeatType { A, B, C, D }
     @Override
@@ -83,7 +83,6 @@ public class RowSeatAdapter extends RecyclerView.Adapter<RowSeatAdapter.RowSeatV
             this.seatType = seatType;
             this.holder = holder;
         }
-
         @Override
         public void onClick(View v) {
             int position = holder.getAdapterPosition();
@@ -94,24 +93,27 @@ public class RowSeatAdapter extends RecyclerView.Adapter<RowSeatAdapter.RowSeatV
                 showToast("This seat is already booked");
                 return;
             }
-
-            int previousPosition = selectedPosition;
-            RowSeatItem previousItem = null;
-            if (previousPosition != RecyclerView.NO_POSITION) {
-                previousItem = listRowSeat.get(previousPosition);
-                previousItem.setSelectedSeatType(null);
+            if (selectedPosition != RecyclerView.NO_POSITION && selectedSeatType != null) {
+                RowSeatItem previousItem = listRowSeat.get(selectedPosition);
+                if (selectedSeatType == SeatType.A) {
+                    previousItem.setStateSeatA_i(1); // Set to selected
+                } else if (selectedSeatType == SeatType.B) {
+                    previousItem.setStateSeatB_i(1); // Set to selected
+                } else if (selectedSeatType == SeatType.C) {
+                    previousItem.setStateSeatC_i(1); // Set to selected
+                } else if (selectedSeatType == SeatType.D) {
+                    previousItem.setStateSeatD_i(1); // Set to selected
+                }
+                notifyItemChanged(selectedPosition);
             }
 
             if (selectedPosition == position && selectedSeatType == seatType) {
                 selectedPosition = RecyclerView.NO_POSITION;
                 selectedSeatType = null;
-                item.setSelectedSeatType(null);
             } else {
                 selectedPosition = position;
                 selectedSeatType = seatType;
-                item.setSelectedSeatType(seatType);
             }
-            notifyItemChanged(previousPosition);
             notifyItemChanged(position);
             if (listener != null) listener.onItemClick(position);
         }
@@ -120,13 +122,13 @@ public class RowSeatAdapter extends RecyclerView.Adapter<RowSeatAdapter.RowSeatV
     private boolean isSeatBooked(RowSeatItem item, SeatType seatType) {
         switch (seatType) {
             case A:
-                return item.getStateSeatA_i() == 1;
+                return item.getStateSeatA_i() == 0;
             case B:
-                return item.getStateSeatB_i() == 1;
+                return item.getStateSeatB_i() == 0;
             case C:
-                return item.getStateSeatC_i() == 1;
+                return item.getStateSeatC_i() == 0;
             case D:
-                return item.getStateSeatD_i() == 1;
+                return item.getStateSeatD_i() == 0;
             default:
                 return false;
         }
@@ -150,5 +152,15 @@ public class RowSeatAdapter extends RecyclerView.Adapter<RowSeatAdapter.RowSeatV
     }
     private void showToast(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+    public void setSeatSelected(List<RowSeatItem> listRowSeat) {
+        for (int i = 0; i < listRowSeat.size(); i++) {
+            RowSeatItem item = listRowSeat.get(i);
+            if (item.getStateSeatA_i() == 0) item.setStateSeatA_i(1);
+            else if (item.getStateSeatB_i() == 0) item.setStateSeatB_i(1);
+            else if (item.getStateSeatC_i() == 0) item.setStateSeatC_i(1);
+            else if (item.getStateSeatD_i() == 0) item.setStateSeatD_i(1);
+        }
+        notifyDataSetChanged();
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,7 +127,7 @@ public class BoardingPassFragment extends Fragment {
 
         String name = "British Airways Flight " + ticketID;
         name_flight.setText(name);
-
+        Log.d("TAG", "onCreateView:" + departure_place);
         from_place.setText(departure_place);
         from_place_abb.setText(departure_place_abb);
 
@@ -138,7 +139,6 @@ public class BoardingPassFragment extends Fragment {
         class_name.setText(name_class);
 
         passenger_num.setText(setPassenger(numPeo, numBaby));
-        /*eat.setText(setSeat(travellers).toString());*/
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
