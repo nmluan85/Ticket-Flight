@@ -2,27 +2,43 @@ package com.example.ticket_flight;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Home extends AppCompatActivity {
     private int selectedTab = 1;
     private RelativeLayout bottom_navigation_bar;
+    private SearchView searching;
+    private RecyclerView view_search;
+    private List<SearchItem> searchItems;
+    private List<SearchItem> resultList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         bottom_navigation_bar = findViewById(R.id.include_layout);
+        searching = findViewById(R.id.editText_search);
+        view_search = findViewById(R.id.recycler_view_search);
+        searching.requestFocus();
 
         final LinearLayout homeLayout = findViewById(R.id.homeLayout);
         final LinearLayout bookingLayout = findViewById(R.id.bookingLayout);
@@ -45,6 +61,41 @@ public class Home extends AppCompatActivity {
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
         }
+        view_search.setLayoutManager(new LinearLayoutManager(Home.this));
+        searchItems = generateItemSearch();
+        SearchAdapter searchAdapter = new SearchAdapter(searchItems);
+        view_search.setAdapter(searchAdapter);
+
+        searching.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                view_search.setVisibility(View.VISIBLE);
+                resultList = new ArrayList<>();
+                Log.d("TAG", "onQueryTextSubmit: "+query);
+                if (!query.isEmpty()){
+                    for (int i = 0; i < searchItems.size(); i++) {
+                        if (searchItems.get(i).getFrom().toUpperCase().contains(query.toUpperCase())) {
+                            SearchItem item = new SearchItem(searchItems.get(i).getFrom(), searchItems.get(i).getTo(), true);
+                            resultList.add(item);
+                        }
+                    }
+                    view_search.setLayoutManager(new LinearLayoutManager(Home.this));
+                    SearchAdapter searchAdapter = new SearchAdapter(resultList);
+                    view_search.setAdapter(searchAdapter);
+                }
+                else {
+                    view_search.setLayoutManager(new LinearLayoutManager(Home.this));
+                    SearchAdapter searchAdapter = new SearchAdapter(searchItems);
+                    view_search.setAdapter(searchAdapter);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         homeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,6 +186,22 @@ public class Home extends AppCompatActivity {
             }
         });
     }
+
+    private List<SearchItem> generateItemSearch() {
+        List<SearchItem> searchItems = new ArrayList<>();
+        searchItems.add(new SearchItem("London (LDN)", "Tokyo (TKY)", true));
+        searchItems.add(new SearchItem("HCM", "Paris (PAR)", true));
+        searchItems.add(new SearchItem("Lunar New Year Festival", "", false));
+        searchItems.add(new SearchItem("Christmas", "", false));
+        searchItems.add(new SearchItem("Eiffel Tower, Paris", "", false));
+        searchItems.add(new SearchItem("Mexico (MEX)", "Vietnam (VN)", true));
+        searchItems.add(new SearchItem("London (LDN)", "Tokyo (TKY)", true));
+        searchItems.add(new SearchItem("Halloween", "", false));
+        searchItems.add(new SearchItem("The Taj Mahal, India", "", false));
+        searchItems.add(new SearchItem("Great Wall of China", "", false));
+        return searchItems;
+    }
+
     private void loadFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
