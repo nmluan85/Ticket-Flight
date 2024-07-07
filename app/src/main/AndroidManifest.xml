@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TicketFlight"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".CustomActivity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,19 +22,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OnBoarding"
+            android:name=".CustomActivity.OnBoarding"
             android:exported="true">
         </activity>
         <activity
-            android:name=".Welcome"
+            android:name=".CustomActivity.Welcome"
             android:exported="true">
         </activity>
         <activity
-            android:name=".SignIn"
+            android:name=".CustomActivity.SignIn"
             android:exported="true">
         </activity>
         <activity
-            android:name=".Home"
+            android:name=".CustomActivity.Home"
             android:exported="true">
         </activity>
     </application>

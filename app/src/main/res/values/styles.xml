@@ -4,4 +4,7 @@
         <!-- Change the colorAccent to your desired color -->
         <item name="android:colorAccent">@color/mainColor</item>
     </style>
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">#6FB0A9</item>
+    </style>
 </resources>

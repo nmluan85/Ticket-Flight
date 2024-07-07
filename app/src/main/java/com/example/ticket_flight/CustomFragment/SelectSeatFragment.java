@@ -152,9 +152,8 @@ public class SelectSeatFragment extends Fragment {
         travellerAdapter.setOnItemClickListener(new TravellerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                /*currentTraveller = position;
+                currentTraveller = position;
                 travellerAdapter.notifyDataSetChanged();
-                rowSeatAdapter.updateData(rowSeatItems);
                 if(currentTraveller != previousTraveller){
                     if (currentSeat_index != -1){
                         travellerItems.get(previousTraveller).setIsBooked(2);
@@ -175,37 +174,17 @@ public class SelectSeatFragment extends Fragment {
                     RowSeatItem item_seat = rowSeatItems.get(Integer.parseInt(item.getRowNum()));
                     item_seat.setSeatSelected(item.getColumnName());
                 }
-                displayResult();*/
-                selectedTravellerPosition = position;
-
             }
         });
         rowSeatAdapter.setOnItemClickListener(new RowSeatAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                for (RowSeatItem item : rowSeatItems){
-                    Log.d("TAG", "item:" + item.getRow_i() + ":" +  item.getStateSeatA_i() + ":" + item.getStateSeatB_i() + ":" + item.getStateSeatC_i() + ":" + item.getStateSeatD_i());
-                }
-                /*travellerAdapter.notifyDataSetChanged();
+                travellerAdapter.notifyDataSetChanged();
                 rowSeatAdapter.notifyDataSetChanged();
                 currentSeat_index = position;
                 currentSeatType = rowSeatItems.get(position).getSelectedSeatType();
                 currentSeatDetail = "Traveller " + String.valueOf(currentTraveller + 1) + " / " + String.valueOf(currentSeat_index + 1) + currentSeatType.name();
-                text_your_seat.setText(currentSeatDetail);*/
-                if (selectedTravellerPosition != -1){
-                    RowSeatItem seatItem = rowSeatItems.get(position);
-                    TravellerItem selectedTraveller = travellerItems.get(selectedTravellerPosition);
-
-                    if (seatItem.getSelectedSeatType() != null){
-                        selectedTraveller.setColumnName(seatItem.getSelectedSeatType());
-                        selectedTraveller.setRowNum(String.valueOf(position + 1));
-                        selectedTraveller.setIsBooked(2);
-                        rowSeatItems.get(position).setSeatBooked(seatItem.getSelectedSeatType());
-                        travellerAdapter.notifyItemChanged(selectedTravellerPosition);
-                        rowSeatAdapter.notifyItemChanged(position);
-                        /*travellerItems.set(selectedTravellerPosition, selectedTraveller);*/
-                    }
-                }
+                text_your_seat.setText(currentSeatDetail);
             }
         });
         recyclerView_traveller.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
