@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ticket_flight.CustomAdapter.RowSeatAdapter;
 import com.example.ticket_flight.CustomAdapter.TravellerAdapter;
@@ -61,7 +62,7 @@ public class SelectSeatFragment extends Fragment {
     ////////////////
     private ImageButton back, continue_button;
     private TextView text_your_seat, text_total_price;
-    private int currentTraveller, previousTraveller, currentSeat_index;
+    private int currentTraveller, previousTraveller, currentSeat_index = -1;
     private String currentSeatDetail;
     private RowSeatAdapter.SeatType currentSeatType;
     private ConstraintLayout layout_select_seat;
@@ -153,27 +154,42 @@ public class SelectSeatFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 currentTraveller = position;
-                travellerAdapter.notifyDataSetChanged();
+                for (int i = 0; i < rowSeatItems.size(); i++){
+                    Log.d("TAG", "onItemClick: " + rowSeatItems.get(i).getStateSeatA_i() + "," + rowSeatItems.get(i).getStateSeatB_i() + "," + rowSeatItems.get(i).getStateSeatC_i() + "," + rowSeatItems.get(i).getStateSeatD_i());
+                }
                 if(currentTraveller != previousTraveller){
+                    rowSeatAdapter.setselectedPosition(RecyclerView.NO_POSITION);
+                    rowSeatAdapter.updateSateSeat();
+                    rowSeatAdapter.notifyDataSetChanged();
+                    TravellerItem itemTraveller = travellerItems.get(previousTraveller);
                     if (currentSeat_index != -1){
-                        travellerItems.get(previousTraveller).setIsBooked(2);
-                        travellerItems.get(previousTraveller).setRowNum(String.valueOf(currentSeat_index + 1));
-                        travellerItems.get(previousTraveller).setColumnName(currentSeatType);
-                        rowSeatItems.get(currentSeat_index).setSeatBooked(currentSeatType);
-                        currentSeat_index = -1;
-                    } else {
-                        travellerItems.get(previousTraveller).setIsBooked(0);
+                        RowSeatItem itemSeat = rowSeatItems.get(currentSeat_index);
+                        itemTraveller.setIsBooked(2);
+                        itemTraveller.setColumnName(itemSeat.getSelectedSeatType());
+                        itemTraveller.setRowNum(String.valueOf(currentSeat_index + 1));
+                    }
+                    else {
+                        itemTraveller.setIsBooked(0);
                     }
                     previousTraveller = currentTraveller;
+                    currentSeat_index = -1;
                 }
-                else if (travellerItems.get(position).getIsBooked() == 2){
-                    TravellerItem item = travellerItems.get(currentTraveller);
+                Log.d("TAG", "testItemClick: " + travellerItems.get(position).getIsBooked());
+                if (!travellerItems.get(position).getRowNum().isEmpty()){
+                    Log.d("TAG", "Booked: " + position);
+                    TravellerItem item = travellerItems.get(position);
+                    item.setIsBooked(1);
                     currentSeatDetail = "Traveller " + String.valueOf(currentTraveller + 1) + " / " + item.getRowNum() + item.getColumnName().name();
                     Log.d("Booked", "currentSeatDetail: " + currentSeatDetail);
                     text_your_seat.setText(currentSeatDetail);
-                    RowSeatItem item_seat = rowSeatItems.get(Integer.parseInt(item.getRowNum()));
+                    /*text_total_price.setText(String.valueOf(totalPrice()));*/
+
+                    currentSeat_index = Integer.parseInt(item.getRowNum()) - 1;
+                    RowSeatItem item_seat = rowSeatItems.get(Integer.parseInt(item.getRowNum()) - 1);
                     item_seat.setSeatSelected(item.getColumnName());
+                    rowSeatAdapter.notifyDataSetChanged();
                 }
+                travellerAdapter.notifyDataSetChanged();
             }
         });
         rowSeatAdapter.setOnItemClickListener(new RowSeatAdapter.OnItemClickListener() {
@@ -182,12 +198,16 @@ public class SelectSeatFragment extends Fragment {
                 for (int i = 0; i < rowSeatItems.size(); i++){
                     Log.d("TAG", "onItemClick: " + rowSeatItems.get(i).getStateSeatA_i() + "," + rowSeatItems.get(i).getStateSeatB_i() + "," + rowSeatItems.get(i).getStateSeatC_i() + "," + rowSeatItems.get(i).getStateSeatD_i());
                 }
-                travellerAdapter.notifyDataSetChanged();
+                for (int i =0; i < travellerItems.size(); i++){
+                    Log.d("TAG", "onItemClick: " + travellerItems.get(i).getIsBooked() + "," + travellerItems.get(i).getRowNum() + "," + travellerItems.get(i).getColumnName());
+                }
                 rowSeatAdapter.notifyDataSetChanged();
                 currentSeat_index = position;
                 currentSeatType = rowSeatItems.get(position).getSelectedSeatType();
                 currentSeatDetail = "Traveller " + String.valueOf(currentTraveller + 1) + " / " + String.valueOf(currentSeat_index + 1) + currentSeatType.name();
                 text_your_seat.setText(currentSeatDetail);
+                /*text_total_price.setText("$" + String.valueOf(totalPrice()));*/
+                rowSeatAdapter.updateSateSeat();
             }
         });
         recyclerView_traveller.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -205,41 +225,45 @@ public class SelectSeatFragment extends Fragment {
         continue_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BoardingPassFragment boardingPassFragment = BoardingPassFragment
-                        .newInstance(departure_place, arrival_place, departure_date, departure_time
-                                ,number_id, class_name, total_price, numPeo, numBaby, departure_place_abb, arrival_place_abb);
-                boardingPassFragment.setTravellersInformation(travellerItems);
-                boardingPassFragment.setOnFragmentInteractionListener(new BoardingPassFragment.OnFragmentInteractionListener() {
-                    @Override
-                    public void onFragmentBack() {
-                        getChildFragmentManager()
-                                .beginTransaction()
-                                .remove(boardingPassFragment)
-                                .commit();
-                        layout_select_seat.setVisibility(View.VISIBLE);
-                    }
+                if (checkComplete()){
+                    BoardingPassFragment boardingPassFragment = BoardingPassFragment
+                            .newInstance(departure_place, arrival_place, departure_date, departure_time
+                                    ,number_id, class_name, total_price, numPeo, numBaby, departure_place_abb, arrival_place_abb);
+                    boardingPassFragment.setTravellersInformation(travellerItems);
+                    boardingPassFragment.setOnFragmentInteractionListener(new BoardingPassFragment.OnFragmentInteractionListener() {
+                        @Override
+                        public void onFragmentBack() {
+                            getChildFragmentManager()
+                                    .beginTransaction()
+                                    .remove(boardingPassFragment)
+                                    .commit();
+                            layout_select_seat.setVisibility(View.VISIBLE);
+                        }
+                        @Override
+                        public void onFragmentSaveChanges() {
 
-                    @Override
-                    public void onFragmentSaveChanges() {
+                        }
 
-                    }
-
-                    @Override
-                    public void onFragmentBackSuccess() {
-                        getChildFragmentManager()
-                                .beginTransaction()
-                                .remove(boardingPassFragment)
-                                .commit();
-                        mListener.onFragmentBackSuccess();
-                        layout_select_seat.setVisibility(View.VISIBLE);
-                    }
-                });
-                getChildFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container_view_select_seat, boardingPassFragment)
-                        .addToBackStack(null)
-                        .commit();
-                layout_select_seat.setVisibility(View.GONE);
+                        @Override
+                        public void onFragmentBackSuccess() {
+                            getChildFragmentManager()
+                                    .beginTransaction()
+                                    .remove(boardingPassFragment)
+                                    .commit();
+                            mListener.onFragmentBackSuccess();
+                            layout_select_seat.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    getChildFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container_view_select_seat, boardingPassFragment)
+                            .addToBackStack(null)
+                            .commit();
+                    layout_select_seat.setVisibility(View.GONE);
+                }
+                else {
+                    showToast("There are a few people who have not been selected for their seats!");
+                }
             }
         });
         return view;
@@ -269,5 +293,25 @@ public class SelectSeatFragment extends Fragment {
         previousTraveller = 0;
         return travellerItems;
     }
-
+    private boolean checkComplete(){
+        for (int i = 0; i < travellerItems.size(); i++){
+            if (travellerItems.get(i).getIsBooked() == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+    private float totalPrice(){
+        float total = 0;
+        String priceItem = price.substring(1);
+        for (int i = 0; i < travellerItems.size(); i++){
+            if (!travellerItems.get(i).getRowNum().isEmpty()){
+                total += Float.parseFloat(price);
+            }
+        }
+        return total;
+    }
+    private void showToast(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
 }

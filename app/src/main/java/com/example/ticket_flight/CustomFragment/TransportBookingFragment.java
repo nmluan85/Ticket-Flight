@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,8 +64,8 @@ public class TransportBookingFragment extends Fragment {
     private TextView iconEconomy, iconBusiness, text_departure_date, text_arrival_date;
     private ImageView imagePlane, iconPlane, imageShip, iconShip, imageTrain, iconTrain, imageBus, iconBus;
     private ImageButton search, back, swap, button_departure_date, button_arrival_date;
-    private String from_place, to_place, departureDate, returnDate, class_name, transport_name;
-    private String numPeo, numBaby, numPet, numLuggage;
+    private String from_place = "", to_place = "", departureDate = "" , returnDate ="", class_name = "", transport_name = "";
+    private String numPeo = "", numBaby = "", numPet = "", numLuggage = "";
     private Calendar departureCalendar, arrivalCalendar;
     private SimpleDateFormat dateFormat;
     private RelativeLayout bottom_navigation_bar;
@@ -415,41 +416,45 @@ public class TransportBookingFragment extends Fragment {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BookingTransportFlightFragment transportFlightFragment = BookingTransportFlightFragment
-                        .newInstance(from_place, to_place, departureDate, returnDate, numPeo, numBaby, numPet, numLuggage, class_name, transport_name);
-                transportFlightFragment.setOnFragmentInteractionListener(new BookingTransportFlightFragment.OnFragmentInteractionListener() {
-                    @Override
-                    public void onFragmentBack() {
-                        getChildFragmentManager()
-                                .beginTransaction()
-                                .remove(transportFlightFragment)
-                                .commit();
-                        layout.setVisibility(View.VISIBLE);
-                        bottom_navigation_bar.setVisibility(View.VISIBLE);
-                    }
-                    @Override
-                    public void onFragmentSaveChanges() {
+                if (areFieldsValid()) {
+                    BookingTransportFlightFragment transportFlightFragment = BookingTransportFlightFragment
+                            .newInstance(from_place, to_place, departureDate, returnDate, numPeo, numBaby, numPet, numLuggage, class_name, transport_name);
+                    transportFlightFragment.setOnFragmentInteractionListener(new BookingTransportFlightFragment.OnFragmentInteractionListener() {
+                        @Override
+                        public void onFragmentBack() {
+                            getChildFragmentManager()
+                                    .beginTransaction()
+                                    .remove(transportFlightFragment)
+                                    .commit();
+                            layout.setVisibility(View.VISIBLE);
+                            bottom_navigation_bar.setVisibility(View.VISIBLE);
+                        }
+                        @Override
+                        public void onFragmentSaveChanges() {
 
-                    }
+                        }
 
-                    @Override
-                    public void onFragmentBackSuccess() {
-                        getChildFragmentManager()
-                                .beginTransaction()
-                                .remove(transportFlightFragment)
-                                .commit();
-                        mListener.onFragmentBackSuccess();
-                        layout.setVisibility(View.VISIBLE);
-                        bottom_navigation_bar.setVisibility(View.VISIBLE);
-                    }
-                });
-                getChildFragmentManager()
-                        .beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.containerView_booking_flight, transportFlightFragment)
-                        .commit();
-                layout.setVisibility(View.GONE);
-                bottom_navigation_bar.setVisibility(View.GONE);
+                        @Override
+                        public void onFragmentBackSuccess() {
+                            getChildFragmentManager()
+                                    .beginTransaction()
+                                    .remove(transportFlightFragment)
+                                    .commit();
+                            mListener.onFragmentBackSuccess();
+                            layout.setVisibility(View.VISIBLE);
+                            bottom_navigation_bar.setVisibility(View.VISIBLE);
+                        }
+                    });
+                    getChildFragmentManager()
+                            .beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.containerView_booking_flight, transportFlightFragment)
+                            .commit();
+                    layout.setVisibility(View.GONE);
+                    bottom_navigation_bar.setVisibility(View.GONE);
+                } else {
+                    Toast.makeText(getContext(), "Please fill in all the fields (except Baby, Pet, Luggage fields)", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -590,5 +595,15 @@ public class TransportBookingFragment extends Fragment {
     }
     private void showToast(String message) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+    }
+    private boolean areFieldsValid() {
+        if (from_place.isEmpty() || to_place.isEmpty() ||
+                departureDate.isEmpty() || returnDate.isEmpty() ||
+                numPeo.isEmpty() || sp_from.getSelectedItem() == null ||
+                sp_to.getSelectedItem() == null || class_name.isEmpty() ||
+                transport_name.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 }

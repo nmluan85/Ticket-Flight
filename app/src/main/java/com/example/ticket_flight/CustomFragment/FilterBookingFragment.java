@@ -240,7 +240,11 @@ public class FilterBookingFragment extends Fragment {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onFragmentBack();
+                if (areAllRequiredFieldsFilled()) {
+                    mListener.onFragmentBack();
+                } else {
+                    Toast.makeText(getContext(), "Please fill in all the required fields", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         reset.setOnClickListener(new View.OnClickListener() {
@@ -266,5 +270,25 @@ public class FilterBookingFragment extends Fragment {
             }
         });
         return view;
+    }
+    private boolean areAllRequiredFieldsFilled() {
+        boolean isValid = true;
+
+        if (arrivalTime == null || arrivalTime.isEmpty()) {
+            isValid = false;
+        }
+        if (departureTime == null || departureTime.isEmpty()) {
+            isValid = false;
+        }
+        if (minPrice == null || minPrice.isEmpty()) {
+            isValid = false;
+        }
+        if (maxPrice == null || maxPrice.isEmpty()) {
+            isValid = false;
+        }
+        if (typeSort == null || typeSort.isEmpty()) {
+            isValid = false;
+        }
+        return isValid;
     }
 }

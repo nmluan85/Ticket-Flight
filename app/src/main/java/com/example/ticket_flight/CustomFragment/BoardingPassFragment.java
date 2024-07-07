@@ -127,7 +127,6 @@ public class BoardingPassFragment extends Fragment {
 
         String name = "British Airways Flight " + ticketID;
         name_flight.setText(name);
-        Log.d("TAG", "onCreateView:" + departure_place);
         from_place.setText(departure_place);
         from_place_abb.setText(departure_place_abb);
 
@@ -139,7 +138,12 @@ public class BoardingPassFragment extends Fragment {
         class_name.setText(name_class);
 
         passenger_num.setText(setPassenger(numPeo, numBaby));
+        seat.setText(setSeat(travellers));
 
+        for (TravellerItem traveller : travellers) {
+            Log.d("TAG", "onCreateView: " + traveller.getRowNum() + traveller.getColumnName());
+        }
+        Log.d("TAG", "onCreateView: " + setSeat(travellers));
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,12 +168,14 @@ public class BoardingPassFragment extends Fragment {
 
         return adults + " " + adultLabel + "\n" + children + " " + childLabel;
     }
-    private StringBuilder setSeat(List<TravellerItem> travellers){
-        StringBuilder seatList = new StringBuilder();
+    private String setSeat(List<TravellerItem> travellers){
+        String seatList = new String();
         for (TravellerItem traveller : travellers) {
-            seatList.append(traveller.getRowNum()).append(traveller.getColumnName().name()).append(", ");
+            String number = traveller.getRowNum();
+            String letter = traveller.getColumnName().toString();
+            seatList += number + letter + ", ";
         }
-        seatList.setLength(seatList.length() - 2);
+        seatList = seatList.substring(0, seatList.length() - 2);
         return seatList;
     }
 }

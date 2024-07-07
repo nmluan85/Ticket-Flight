@@ -94,20 +94,30 @@ public class RowSeatAdapter extends RecyclerView.Adapter<RowSeatAdapter.RowSeatV
                 showToast("This seat is already booked");
                 return;
             }
-
-            // Deselect the previous selected seat
-            if (selectedPosition != RecyclerView.NO_POSITION) {
-                RowSeatItem previousItem = listRowSeat.get(selectedPosition);
-                setSeatAvailable(previousItem, selectedSeatType);
-                notifyItemChanged(selectedPosition);
+            int previousPosition = selectedPosition;
+            RowSeatItem previousItem = null;
+            if (previousPosition != RecyclerView.NO_POSITION) {
+                previousItem = listRowSeat.get(previousPosition);
+                setSeatAvailable(previousItem, previousItem.getSelectedSeatType());
+                previousItem.setSelectedSeatType(null);
             }
 
-            // Select the new seat
-            selectedPosition = position;
-            selectedSeatType = seatType;
-            setSeatSelecting(item, seatType);
+            if (selectedPosition == position && selectedSeatType == seatType) {
+                selectedPosition = RecyclerView.NO_POSITION;
+                selectedSeatType = null;
+                setSeatAvailable(item, seatType);
+                item.setSelectedSeatType(null);
+            } else {
+                selectedPosition = position;
+                selectedSeatType = seatType;
+                setSeatSelected(item, seatType);
+                item.setSelectedSeatType(seatType);
+            }
 
+            notifyItemChanged(previousPosition);
             notifyItemChanged(position);
+
+            if (listener != null) listener.onItemClick(position);
         }
     }
 
@@ -145,7 +155,7 @@ public class RowSeatAdapter extends RecyclerView.Adapter<RowSeatAdapter.RowSeatV
     private void showToast(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
-    private void setSeatSelecting(RowSeatItem item, SeatType seatType) {
+    private void setSeatSelected(RowSeatItem item, SeatType seatType) {
         switch (seatType) {
             case A:
                 item.setStateSeatA_i(0);
@@ -176,5 +186,16 @@ public class RowSeatAdapter extends RecyclerView.Adapter<RowSeatAdapter.RowSeatV
                 item.setStateSeatD_i(2);
                 break;
         }
+    }
+    public void updateSateSeat(){
+        for (RowSeatItem item : listRowSeat) {
+            if (item.getStateSeatA_i() == 0) item.setStateSeatA_i(1);
+            else if (item.getStateSeatB_i() == 0) item.setStateSeatB_i(1);
+            else if (item.getStateSeatC_i() == 0) item.setStateSeatC_i(1);
+            else if (item.getStateSeatD_i() == 0) item.setStateSeatD_i(1);
+        }
+    }
+    public void setselectedPosition(int position){
+        this.selectedPosition = position;
     }
 }
