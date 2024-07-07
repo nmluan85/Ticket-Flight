@@ -1,5 +1,6 @@
 package com.example.ticket_flight;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -35,6 +36,13 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.DateViewHolder
         DateItem item = bookingDate.get(position);
         holder.day.setText(item.getDay());
         holder.dayNum.setText(item.getDate());
+
+        if (item.getIsSelected()){
+            holder.button_day.setBackgroundResource(R.drawable.icon_date_active);
+        }
+        else {
+            holder.button_day.setBackgroundResource(R.drawable.icon_date);
+        }
     }
     @Override
     public int getItemCount() {
@@ -57,6 +65,10 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.DateViewHolder
                         if (position != RecyclerView.NO_POSITION){
                             listener.onItemClick(position);
                         }
+                        for (int i = 0; i < bookingDate.size(); i++){
+                            bookingDate.get(i).setIsSelected(i == position);
+                        }
+                        notifyDataSetChanged();
                     }
                 }
             });

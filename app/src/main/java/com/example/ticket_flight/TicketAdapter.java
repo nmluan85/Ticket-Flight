@@ -32,7 +32,9 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
     public void onBindViewHolder(@NonNull TicketViewHolder holder, int position){
         TicketItem item = tickets.get(position);
         holder.from.setText(item.getFrom());
+        holder.from_abb.setText(item.getFrom_abb());
         holder.to.setText(item.getTo());
+        holder.to_abb.setText(item.getTo_abb());
         holder.date.setText(item.getDate());
         holder.departure.setText(item.getDeparture());
         holder.price.setText(item.getPrice());
@@ -45,12 +47,14 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
     class TicketViewHolder extends RecyclerView.ViewHolder {
 
         ImageButton ticket;
-        TextView from, to, date, departure, price, number;
+        TextView from, from_abb, to, to_abb, date, departure, price, number;
         public TicketViewHolder(@NonNull View itemView){
             super(itemView);
             ticket = itemView.findViewById(R.id.image_button_card);
             from = itemView.findViewById(R.id.from_place);
+            from_abb = itemView.findViewById(R.id.from_place_abb);
             to = itemView.findViewById(R.id.to_place);
+            to_abb = itemView.findViewById(R.id.to_place_abb);
             date = itemView.findViewById(R.id.date);
             departure = itemView.findViewById(R.id.departure);
             price = itemView.findViewById(R.id.price);

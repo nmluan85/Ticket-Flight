@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,28 +22,19 @@ import java.util.List;
  */
 public class BookingFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     public BookingFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BookingFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+    private RelativeLayout bottom_navigation_bar;
+    public void setLayoutNavigationBar(RelativeLayout bottom_navigation_bar) {
+        this.bottom_navigation_bar = bottom_navigation_bar;
+    }
     public static BookingFragment newInstance(String param1, String param2) {
         BookingFragment fragment = new BookingFragment();
         Bundle args = new Bundle();
@@ -85,6 +77,7 @@ public class BookingFragment extends Fragment {
                 switch (bookingItem.getName_item()) {
                     case "Hotel":
                         HotelBookingFragment hotelBookingFragment = new HotelBookingFragment();
+                        hotelBookingFragment.setLayoutNavigationBar(bottom_navigation_bar);
                         hotelBookingFragment.setOnFragmentInteractionListener(new HotelBookingFragment.OnFragmentInteractionListener() {
                             @Override
                             public void onFragmentBack() {
@@ -92,6 +85,7 @@ public class BookingFragment extends Fragment {
                                         .beginTransaction()
                                         .remove(hotelBookingFragment)
                                         .commit();
+                                recyclerView.setVisibility(View.VISIBLE);
                             }
                             @Override
                             public void onFragmentSaveChanges() {
@@ -102,9 +96,11 @@ public class BookingFragment extends Fragment {
                                 .addToBackStack(null)
                                 .replace(R.id.fragmentContainer_Booking, hotelBookingFragment)
                                 .commit();
+                        recyclerView.setVisibility(View.GONE);
                         break;
                     case "Trips":
                         TripsBookingFragment tripsBookingFragment = new TripsBookingFragment();
+                        tripsBookingFragment.setLayoutNavigationBar(bottom_navigation_bar);
                         tripsBookingFragment.setOnFragmentInteractionListener(new TripsBookingFragment.OnFragmentInteractionListener() {
                             @Override
                             public void onFragmentBack() {
@@ -112,6 +108,7 @@ public class BookingFragment extends Fragment {
                                         .beginTransaction()
                                         .remove(tripsBookingFragment)
                                         .commit();
+                                recyclerView.setVisibility(View.VISIBLE);
                             }
                             @Override
                             public void onFragmentSaveChanges() {
@@ -122,9 +119,11 @@ public class BookingFragment extends Fragment {
                                 .addToBackStack(null)
                                 .replace(R.id.fragmentContainer_Booking, tripsBookingFragment)
                                 .commit();
+                        recyclerView.setVisibility(View.GONE);
                         break;
                     case "Transport":
                         TransportBookingFragment transportBookingFragment = new TransportBookingFragment();
+                        transportBookingFragment.setLayoutNavigationBar(bottom_navigation_bar);
                         transportBookingFragment.setOnFragmentInteractionListener(new TransportBookingFragment.OnFragmentInteractionListener() {
                             @Override
                             public void onFragmentBack() {
@@ -132,10 +131,20 @@ public class BookingFragment extends Fragment {
                                         .beginTransaction()
                                         .remove(transportBookingFragment)
                                         .commit();
+                                recyclerView.setVisibility(View.VISIBLE);
                             }
+
                             @Override
                             public void onFragmentSaveChanges() {
+                            }
 
+                            @Override
+                            public void onFragmentBackSuccess() {
+                                getChildFragmentManager()
+                                        .beginTransaction()
+                                        .remove(transportBookingFragment)
+                                        .commit();
+                                recyclerView.setVisibility(View.VISIBLE);
                             }
                         });
                         getChildFragmentManager()
@@ -143,10 +152,12 @@ public class BookingFragment extends Fragment {
                                 .addToBackStack(null)
                                 .replace(R.id.fragmentContainer_Booking, transportBookingFragment)
                                 .commit();
-
+                        recyclerView.setVisibility(View.GONE);
                         break;
                     case "Events":
                         EventsBookingFragment eventsBookingFragment = new EventsBookingFragment();
+                        eventsBookingFragment.setLayoutNavigationBar(bottom_navigation_bar);
+
                         eventsBookingFragment.setOnFragmentInteractionListener(new EventsBookingFragment.OnFragmentInteractionListener() {
                             @Override
                             public void onFragmentBack() {
@@ -154,6 +165,7 @@ public class BookingFragment extends Fragment {
                                         .beginTransaction()
                                         .remove(eventsBookingFragment)
                                         .commit();
+                                recyclerView.setVisibility(View.VISIBLE);
                             }
                             @Override
                             public void onFragmentSaveChanges() {
@@ -164,6 +176,7 @@ public class BookingFragment extends Fragment {
                                 .addToBackStack(null)
                                 .replace(R.id.fragmentContainer_Booking, eventsBookingFragment)
                                 .commit();
+                        recyclerView.setVisibility(View.GONE);
                         break;
                 }
             }

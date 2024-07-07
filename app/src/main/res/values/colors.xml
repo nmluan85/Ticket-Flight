@@ -11,4 +11,9 @@
     <color name="grey">#6C6C6C</color>
     <color name="color_icon">#01635D</color>
     <color name="booking_picker">#098F82</color>
+    <color name="orange">#FEA36A</color>
+
+    <color name="slider_thumb_color">#00796B</color>
+    <color name="slider_active_track_color">#00796B</color>
+    <color name="slider_inactive_track_color">#B2DFDB</color>
 </resources>

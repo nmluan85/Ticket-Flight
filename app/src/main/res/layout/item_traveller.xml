@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingEnd="15dp">
+    <ImageButton
+        android:id="@+id/button_traveller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/traveller_booking"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/text_traveller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/number_one"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/button_traveller"
+        app:layout_constraintStart_toStartOf="@id/button_traveller"
+        app:layout_constraintEnd_toEndOf="@id/button_traveller"
+        app:layout_constraintBottom_toBottomOf="@id/button_traveller"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

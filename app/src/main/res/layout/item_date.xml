@@ -10,7 +10,7 @@
         android:id="@+id/button_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/date_active"
+        android:background="@drawable/icon_date"
         app:layout_constraintStart_toStartOf="parent"
         android:weightSum="2"
         app:layout_constraintTop_toTopOf="parent"

@@ -38,7 +38,6 @@
                         android:layout_height="wrap_content"
                         android:overScrollMode="never">
                     </androidx.recyclerview.widget.RecyclerView>
-
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

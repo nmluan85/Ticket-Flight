@@ -2,14 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingEnd="10dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-
     <ImageButton
+        android:id="@+id/button_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_hour"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/text_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_icon"
+        android:fontFamily="@font/poppins_medium"
+        android:text="item_hour"
+        app:layout_constraintTop_toTopOf="@+id/button_hour"
+        app:layout_constraintStart_toStartOf="@+id/button_hour"
+        app:layout_constraintEnd_toEndOf="@+id/button_hour"
+        app:layout_constraintBottom_toBottomOf="@+id/button_hour"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

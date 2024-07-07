@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +25,10 @@ public class HotelBookingFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RelativeLayout bottom_navigation_bar;
+    public void setLayoutNavigationBar(RelativeLayout bottom_navigation_bar) {
+        this.bottom_navigation_bar = bottom_navigation_bar;
+    }
     public interface OnFragmentInteractionListener {
         void onFragmentBack();
         void onFragmentSaveChanges();

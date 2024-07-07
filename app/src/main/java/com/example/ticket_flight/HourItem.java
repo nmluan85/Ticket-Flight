@@ -1,22 +1,20 @@
 package com.example.ticket_flight;
 
 public class HourItem {
-    private String from;
-    private String to;
-    public HourItem(String from, String day) {
-        this.from = from;
-        this.to = to;
+    private String content;
+    private boolean isSelected;
+    public HourItem(String content) {
+        this.content = content;
+        this.isSelected = false;
     }
-    public String getFrom(){
-        return from;
+    public String getContent(){
+        return content;
     }
-    public String getTo(){
-        return to;
+    public boolean getIsSelected(){return isSelected;}
+    public void setContent(String content){
+        this.content = content;
     }
-    public void setDate(){
-        this.from = from;
-    }
-    public void setDay(){
-        this.to = to;
+    public void setIsSelected(boolean isSelected){
+        this.isSelected = isSelected;
     }
 }

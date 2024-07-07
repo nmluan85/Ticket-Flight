@@ -9,6 +9,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
@@ -16,10 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Home extends AppCompatActivity {
     private int selectedTab = 1;
+    private RelativeLayout bottom_navigation_bar;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        bottom_navigation_bar = findViewById(R.id.include_layout);
 
         final LinearLayout homeLayout = findViewById(R.id.homeLayout);
         final LinearLayout bookingLayout = findViewById(R.id.bookingLayout);
@@ -69,6 +72,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectedTab != 2){
                     BookingFragment bookingFragment = new BookingFragment();
+                    bookingFragment.setLayoutNavigationBar(bottom_navigation_bar);
                     loadFragment(bookingFragment);
 
                     homeText.setVisibility(View.GONE);

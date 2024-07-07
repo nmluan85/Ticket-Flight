@@ -127,9 +127,18 @@ public class HomeFragment extends Fragment {
                                 .remove(transportBookingFragment)
                                 .commit();
                     }
+
                     @Override
                     public void onFragmentSaveChanges() {
 
+                    }
+
+                    @Override
+                    public void onFragmentBackSuccess() {
+                        getChildFragmentManager()
+                                .beginTransaction()
+                                .remove(transportBookingFragment)
+                                .commit();
                     }
                 });
                 getChildFragmentManager()

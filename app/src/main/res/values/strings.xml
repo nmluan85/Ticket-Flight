@@ -30,6 +30,7 @@
     <string name="to">To</string>
     <string name="departure">Departure</string>
     <string name="returndate">Return</string>
+    <string name="arrival">Arrival</string>
     <string name="passenger_luggage">Passenger &amp; Luggage</string>
     <string name="button_class">Class</string>
     <string name="economy">Economy</string>
@@ -43,7 +44,22 @@
     <string name="date">Date</string>
     <string name="price">Price</string>
     <string name="number">Number</string>
-
+    <string name="filters">Filters</string>
+    <string name="sort_by">Sort by</string>
+    <string name="arrival_time">Arrival time</string>
+    <string name="departure_time">Departure time</string>
+    <string name="lowest_fare">Lowest fare</string>
+    <string name="duration">Duration</string>
+    <string name="reset">Reset</string>
+    <string name="done">Done</string>
+    <string name="select_seat">Select Seats</string>
+    <string name="traveller">Traveller</string>
+    <string name="selected">Selected</string>
+    <string name="booked">Booked</string>
+    <string name="available">Available</string>
+    <string name="your_seat">Your seats</string>
+    <string name="total_price">Total price</string>
+    <string name="continue_name">Continue</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="home_fragment">Home Fragment</string>
     <string name="booking_fragment">Booking</string>
@@ -56,4 +72,11 @@
     <string name="transport_booking">Transport Booking</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="number_one">1</string>
+    <string name="boarding_pass">Boarding Pass</string>
+    <string name="name_pass">British Airways Flight NL-41</string>
+    <string name="passenger">Passenger</string>
+    <string name="ticket">Ticket</string>
+    <string name="seat">Seat</string>
+    <string name="download_ticket">Download Ticket</string>
 </resources>

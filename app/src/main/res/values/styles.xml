@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <!-- Change the colorAccent to your desired color -->
+        <item name="android:colorAccent">@color/mainColor</item>
+    </style>
+</resources>
