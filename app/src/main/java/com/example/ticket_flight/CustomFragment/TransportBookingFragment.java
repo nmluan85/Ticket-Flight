@@ -452,8 +452,6 @@ public class TransportBookingFragment extends Fragment {
                             .commit();
                     layout.setVisibility(View.GONE);
                     bottom_navigation_bar.setVisibility(View.GONE);
-                } else {
-                    Toast.makeText(getContext(), "Please fill in all the fields (except Baby, Pet, Luggage fields)", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -468,8 +466,8 @@ public class TransportBookingFragment extends Fragment {
 
     private List<String> generateListTo() {
         List<String> listTo = new ArrayList<>();
-        listTo.add("London (LDN)");
         listTo.add("New York (NYC)");
+        listTo.add("London (LDN)");
         listTo.add("Paris (PAR)");
         listTo.add("Tokyo (TKY)");
         listTo.add("Los Angeles (LA)");
@@ -478,6 +476,7 @@ public class TransportBookingFragment extends Fragment {
         listTo.add("Rome (ROM)");
         listTo.add("Madrid (MAD)");
         listTo.add("Beijing (BJ)");
+        listTo.add("Vietnam (VN)");
         listTo.add("Moscow (MOW)");
         listTo.add("Dubai (DXB)");
         listTo.add("Toronto (TOR)");
@@ -488,7 +487,6 @@ public class TransportBookingFragment extends Fragment {
         listTo.add("Sao Paulo (SAO)");
         listTo.add("Mumbai (BOM)");
         listTo.add("Cairo (CAI)");
-        listTo.add("Vietnam (VN)");
         return listTo;
     }
 
@@ -521,6 +519,7 @@ public class TransportBookingFragment extends Fragment {
 
 
     private void showDatePicker(boolean isDeparture) {
+        if (!isDeparture) arrivalCalendar = departureCalendar;
         Calendar calendar = isDeparture ? departureCalendar : arrivalCalendar;
         Calendar today = Calendar.getInstance();
 
@@ -597,11 +596,16 @@ public class TransportBookingFragment extends Fragment {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
     private boolean areFieldsValid() {
+        if (from_place.equals(to_place)){
+            showToast("The departure and return locations cannot be the same.");
+            return false;
+        }
         if (from_place.isEmpty() || to_place.isEmpty() ||
                 departureDate.isEmpty() || returnDate.isEmpty() ||
                 numPeo.isEmpty() || sp_from.getSelectedItem() == null ||
                 sp_to.getSelectedItem() == null || class_name.isEmpty() ||
                 transport_name.isEmpty()) {
+            showToast("Please fill in all the fields (except Baby, Pet, Luggage fields)");
             return false;
         }
         return true;

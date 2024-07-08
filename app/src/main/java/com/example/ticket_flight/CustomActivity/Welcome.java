@@ -25,19 +25,19 @@ public class Welcome extends AppCompatActivity {
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sign_up.animate().scaleX(1.1f).scaleY(1.1f).setDuration(100).withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent sign_up = new Intent(Welcome.this, SignIn.class);
-                        startActivity(sign_up);
-                    }
-                }).start();
+
             }
         });
         log_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                log_in.animate().scaleX(1.1f).scaleY(1.1f).setDuration(100).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent log_in = new Intent(Welcome.this, SignIn.class);
+                        startActivity(log_in);
+                    }
+                }).start();
             }
         });
     }

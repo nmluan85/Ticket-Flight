@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.ticket_flight.R;
 import com.example.ticket_flight.TripsBookingFragment;
@@ -27,9 +30,28 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private LinearLayout homeLayout;
+    private LinearLayout bookingLayout;
+    private LinearLayout notificationLayout;
+    private LinearLayout accountLayout;;
 
+    private TextView homeText;
+    private TextView bookingText;
+    private TextView notificationText;
+    private TextView accountText;
     public HomeFragment() {
         // Required empty public constructor
+    }
+    public void setTextView(LinearLayout homeLayout, LinearLayout bookingLayout, LinearLayout notificationLayout, LinearLayout accountLayout
+            , TextView homeText, TextView bookingText, TextView notificationText, TextView accountText){
+        this.homeLayout = homeLayout;
+        this.bookingLayout = bookingLayout;
+        this.notificationLayout = notificationLayout;
+        this.accountLayout = accountLayout;
+        this.homeText = homeText;
+        this.bookingText = bookingText;
+        this.notificationText = notificationText;
+        this.accountText = accountText;
     }
 
     /**
@@ -69,10 +91,27 @@ public class HomeFragment extends Fragment {
         ImageButton button_transport = view.findViewById(R.id.button_transport);
         ImageButton button_events = view.findViewById(R.id.button_events);
 
+        homeText.setVisibility(View.GONE);
+        notificationText.setVisibility(View.GONE);
+        accountText.setVisibility(View.GONE);
+
+        homeLayout.setBackgroundResource(R.drawable.non_active);
+        notificationLayout.setBackgroundResource(R.drawable.non_active);
+        accountLayout.setBackgroundResource(R.drawable.non_active);
 
         button_trips.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                homeText.setVisibility(View.GONE);
+                notificationText.setVisibility(View.GONE);
+                accountText.setVisibility(View.GONE);
+
+                homeLayout.setBackgroundResource(R.drawable.non_active);
+                notificationLayout.setBackgroundResource(R.drawable.non_active);
+                accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                bookingText.setVisibility(View.VISIBLE);
+                bookingLayout.setBackgroundResource(R.drawable.active);
                 TripsBookingFragment tripsBookingFragment = new TripsBookingFragment();
                 tripsBookingFragment.setOnFragmentInteractionListener(new TripsBookingFragment.OnFragmentInteractionListener() {
                     @Override
@@ -81,6 +120,16 @@ public class HomeFragment extends Fragment {
                                 .beginTransaction()
                                 .remove(tripsBookingFragment)
                                 .commit();
+                        bookingText.setVisibility(View.GONE);
+                        notificationText.setVisibility(View.GONE);
+                        accountText.setVisibility(View.GONE);
+
+                        bookingLayout.setBackgroundResource(R.drawable.non_active);
+                        notificationLayout.setBackgroundResource(R.drawable.non_active);
+                        accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                        homeText.setVisibility(View.VISIBLE);
+                        homeLayout.setBackgroundResource(R.drawable.active);
                     }
                     @Override
                     public void onFragmentSaveChanges() {
@@ -92,11 +141,22 @@ public class HomeFragment extends Fragment {
                         .replace(R.id.fragment_container, tripsBookingFragment)
                         .addToBackStack(null)
                         .commit();
+
             }
         });
         button_hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                homeText.setVisibility(View.GONE);
+                notificationText.setVisibility(View.GONE);
+                accountText.setVisibility(View.GONE);
+
+                homeLayout.setBackgroundResource(R.drawable.non_active);
+                notificationLayout.setBackgroundResource(R.drawable.non_active);
+                accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                bookingText.setVisibility(View.VISIBLE);
+                bookingLayout.setBackgroundResource(R.drawable.active);
                 HotelBookingFragment hotelBookingFragment = new HotelBookingFragment();
                 hotelBookingFragment.setOnFragmentInteractionListener(new HotelBookingFragment.OnFragmentInteractionListener() {
                     @Override
@@ -105,6 +165,16 @@ public class HomeFragment extends Fragment {
                                 .beginTransaction()
                                 .remove(hotelBookingFragment)
                                 .commit();
+                        bookingText.setVisibility(View.GONE);
+                        notificationText.setVisibility(View.GONE);
+                        accountText.setVisibility(View.GONE);
+
+                        bookingLayout.setBackgroundResource(R.drawable.non_active);
+                        notificationLayout.setBackgroundResource(R.drawable.non_active);
+                        accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                        homeText.setVisibility(View.VISIBLE);
+                        homeLayout.setBackgroundResource(R.drawable.active);
                     }
                     @Override
                     public void onFragmentSaveChanges() {
@@ -121,6 +191,16 @@ public class HomeFragment extends Fragment {
         button_transport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                homeText.setVisibility(View.GONE);
+                notificationText.setVisibility(View.GONE);
+                accountText.setVisibility(View.GONE);
+
+                homeLayout.setBackgroundResource(R.drawable.non_active);
+                notificationLayout.setBackgroundResource(R.drawable.non_active);
+                accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                bookingText.setVisibility(View.VISIBLE);
+                bookingLayout.setBackgroundResource(R.drawable.active);
                 TransportBookingFragment transportBookingFragment = new TransportBookingFragment();
                 transportBookingFragment.setOnFragmentInteractionListener(new TransportBookingFragment.OnFragmentInteractionListener() {
                     @Override
@@ -129,6 +209,16 @@ public class HomeFragment extends Fragment {
                                 .beginTransaction()
                                 .remove(transportBookingFragment)
                                 .commit();
+                        bookingText.setVisibility(View.GONE);
+                        notificationText.setVisibility(View.GONE);
+                        accountText.setVisibility(View.GONE);
+
+                        bookingLayout.setBackgroundResource(R.drawable.non_active);
+                        notificationLayout.setBackgroundResource(R.drawable.non_active);
+                        accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                        homeText.setVisibility(View.VISIBLE);
+                        homeLayout.setBackgroundResource(R.drawable.active);
                     }
 
                     @Override
@@ -154,6 +244,16 @@ public class HomeFragment extends Fragment {
         button_events.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                homeText.setVisibility(View.GONE);
+                notificationText.setVisibility(View.GONE);
+                accountText.setVisibility(View.GONE);
+
+                homeLayout.setBackgroundResource(R.drawable.non_active);
+                notificationLayout.setBackgroundResource(R.drawable.non_active);
+                accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                bookingText.setVisibility(View.VISIBLE);
+                bookingLayout.setBackgroundResource(R.drawable.active);
                 EventsBookingFragment eventsBookingFragment = new EventsBookingFragment();
                 eventsBookingFragment.setOnFragmentInteractionListener(new EventsBookingFragment.OnFragmentInteractionListener() {
                     @Override
@@ -162,6 +262,16 @@ public class HomeFragment extends Fragment {
                                 .beginTransaction()
                                 .remove(eventsBookingFragment)
                                 .commit();
+                        bookingText.setVisibility(View.GONE);
+                        notificationText.setVisibility(View.GONE);
+                        accountText.setVisibility(View.GONE);
+
+                        bookingLayout.setBackgroundResource(R.drawable.non_active);
+                        notificationLayout.setBackgroundResource(R.drawable.non_active);
+                        accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                        homeText.setVisibility(View.VISIBLE);
+                        homeLayout.setBackgroundResource(R.drawable.active);
                     }
                     @Override
                     public void onFragmentSaveChanges() {

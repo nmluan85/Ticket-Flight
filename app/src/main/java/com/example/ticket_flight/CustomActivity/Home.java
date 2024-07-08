@@ -25,10 +25,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ticket_flight.CustomAdapter.SearchAdapter;
 import com.example.ticket_flight.CustomFragment.AccountFragment;
 import com.example.ticket_flight.CustomFragment.BookingFragment;
+import com.example.ticket_flight.CustomFragment.EventsBookingFragment;
 import com.example.ticket_flight.CustomFragment.HomeFragment;
+import com.example.ticket_flight.CustomFragment.HotelBookingFragment;
 import com.example.ticket_flight.CustomFragment.NotificationFragment;
+import com.example.ticket_flight.CustomFragment.TransportBookingFragment;
 import com.example.ticket_flight.R;
 import com.example.ticket_flight.CustomItem.SearchItem;
+import com.example.ticket_flight.TripsBookingFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +41,8 @@ public class Home extends AppCompatActivity {
     private int selectedTab = 1;
     private RelativeLayout bottom_navigation_bar;
     private EditText search_bar;
+    private ImageButton search_button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -44,6 +50,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         bottom_navigation_bar = findViewById(R.id.include_layout);
         search_bar = findViewById(R.id.editText_search);
+        search_button = findViewById(R.id.imageButton);
 
         final LinearLayout homeLayout = findViewById(R.id.homeLayout);
         final LinearLayout bookingLayout = findViewById(R.id.bookingLayout);
@@ -60,13 +67,199 @@ public class Home extends AppCompatActivity {
         final TextView notificationText = findViewById(R.id.text_notification);
         final TextView accountText = findViewById(R.id.text_account);
 
+        ImageButton button_trips = findViewById(R.id.button_trips);
+        ImageButton button_hotel = findViewById(R.id.button_hotel);
+        ImageButton button_transport = findViewById(R.id.button_transport);
+        ImageButton button_events = findViewById(R.id.button_events);
+
         homeText.setVisibility(View.VISIBLE);
         homeLayout.setBackgroundResource(R.drawable.active);
 
-        if (savedInstanceState == null) {
-            loadFragment(new HomeFragment());
-        }
+        button_trips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeText.setVisibility(View.GONE);
+                notificationText.setVisibility(View.GONE);
+                accountText.setVisibility(View.GONE);
 
+                homeLayout.setBackgroundResource(R.drawable.non_active);
+                notificationLayout.setBackgroundResource(R.drawable.non_active);
+                accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                bookingText.setVisibility(View.VISIBLE);
+                bookingLayout.setBackgroundResource(R.drawable.active);
+                TripsBookingFragment tripsBookingFragment = new TripsBookingFragment();
+                tripsBookingFragment.setOnFragmentInteractionListener(new TripsBookingFragment.OnFragmentInteractionListener() {
+                    @Override
+                    public void onFragmentBack() {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .remove(tripsBookingFragment)
+                                .commit();
+                        bookingText.setVisibility(View.GONE);
+                        notificationText.setVisibility(View.GONE);
+                        accountText.setVisibility(View.GONE);
+
+                        bookingLayout.setBackgroundResource(R.drawable.non_active);
+                        notificationLayout.setBackgroundResource(R.drawable.non_active);
+                        accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                        homeText.setVisibility(View.VISIBLE);
+                        homeLayout.setBackgroundResource(R.drawable.active);
+                    }
+                    @Override
+                    public void onFragmentSaveChanges() {
+
+                    }
+                });
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, tripsBookingFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+        button_hotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeText.setVisibility(View.GONE);
+                notificationText.setVisibility(View.GONE);
+                accountText.setVisibility(View.GONE);
+
+                homeLayout.setBackgroundResource(R.drawable.non_active);
+                notificationLayout.setBackgroundResource(R.drawable.non_active);
+                accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                bookingText.setVisibility(View.VISIBLE);
+                bookingLayout.setBackgroundResource(R.drawable.active);
+                HotelBookingFragment hotelBookingFragment = new HotelBookingFragment();
+                hotelBookingFragment.setOnFragmentInteractionListener(new HotelBookingFragment.OnFragmentInteractionListener() {
+                    @Override
+                    public void onFragmentBack() {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .remove(hotelBookingFragment)
+                                .commit();
+                        bookingText.setVisibility(View.GONE);
+                        notificationText.setVisibility(View.GONE);
+                        accountText.setVisibility(View.GONE);
+
+                        bookingLayout.setBackgroundResource(R.drawable.non_active);
+                        notificationLayout.setBackgroundResource(R.drawable.non_active);
+                        accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                        homeText.setVisibility(View.VISIBLE);
+                        homeLayout.setBackgroundResource(R.drawable.active);
+                    }
+                    @Override
+                    public void onFragmentSaveChanges() {
+
+                    }
+                });
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, hotelBookingFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+        button_transport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeText.setVisibility(View.GONE);
+                notificationText.setVisibility(View.GONE);
+                accountText.setVisibility(View.GONE);
+
+                homeLayout.setBackgroundResource(R.drawable.non_active);
+                notificationLayout.setBackgroundResource(R.drawable.non_active);
+                accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                bookingText.setVisibility(View.VISIBLE);
+                bookingLayout.setBackgroundResource(R.drawable.active);
+                TransportBookingFragment transportBookingFragment = new TransportBookingFragment();
+                transportBookingFragment.setOnFragmentInteractionListener(new TransportBookingFragment.OnFragmentInteractionListener() {
+                    @Override
+                    public void onFragmentBack() {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .remove(transportBookingFragment)
+                                .commit();
+                        bookingText.setVisibility(View.GONE);
+                        notificationText.setVisibility(View.GONE);
+                        accountText.setVisibility(View.GONE);
+
+                        bookingLayout.setBackgroundResource(R.drawable.non_active);
+                        notificationLayout.setBackgroundResource(R.drawable.non_active);
+                        accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                        homeText.setVisibility(View.VISIBLE);
+                        homeLayout.setBackgroundResource(R.drawable.active);
+                    }
+
+                    @Override
+                    public void onFragmentSaveChanges() {
+
+                    }
+
+                    @Override
+                    public void onFragmentBackSuccess() {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .remove(transportBookingFragment)
+                                .commit();
+                    }
+                });
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, transportBookingFragment, "TransportBookingFragment")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+        button_events.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeText.setVisibility(View.GONE);
+                notificationText.setVisibility(View.GONE);
+                accountText.setVisibility(View.GONE);
+
+                homeLayout.setBackgroundResource(R.drawable.non_active);
+                notificationLayout.setBackgroundResource(R.drawable.non_active);
+                accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                bookingText.setVisibility(View.VISIBLE);
+                bookingLayout.setBackgroundResource(R.drawable.active);
+                EventsBookingFragment eventsBookingFragment = new EventsBookingFragment();
+                eventsBookingFragment.setOnFragmentInteractionListener(new EventsBookingFragment.OnFragmentInteractionListener() {
+                    @Override
+                    public void onFragmentBack() {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .remove(eventsBookingFragment)
+                                .commit();
+                        bookingText.setVisibility(View.GONE);
+                        notificationText.setVisibility(View.GONE);
+                        accountText.setVisibility(View.GONE);
+
+                        bookingLayout.setBackgroundResource(R.drawable.non_active);
+                        notificationLayout.setBackgroundResource(R.drawable.non_active);
+                        accountLayout.setBackgroundResource(R.drawable.non_active);
+
+                        homeText.setVisibility(View.VISIBLE);
+                        homeLayout.setBackgroundResource(R.drawable.active);
+                    }
+                    @Override
+                    public void onFragmentSaveChanges() {
+
+                    }
+                });
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, eventsBookingFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         homeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,12 +349,12 @@ public class Home extends AppCompatActivity {
                 }
             }
         });
-        search_bar.setOnClickListener(new View.OnClickListener() {
+        search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(Home.this)
-                        .setTitle("Seat type Error!")
-                        .setMessage("Please select the seats corresponding to your seat type (or class).")
+                        .setTitle("Transport Booking")
+                        .setMessage(search_bar.getText().toString())
                         .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
                         .show();
             }

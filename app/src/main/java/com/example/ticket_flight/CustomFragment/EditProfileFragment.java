@@ -38,12 +38,14 @@ import java.util.List;
 public class EditProfileFragment extends Fragment {
     private String[] information = new String[5];
     private ActivityResultLauncher<Intent> imagePickerLauncher;
+    private final AvatarService avatarService = new AvatarService();
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private static final String ARG_PARAM3 = "param3";
     private static final String ARG_PARAM4 = "param4";
     private static final String ARG_PARAM5 = "param5";
+    private ImageView image_account;
 
     // TODO: Rename and change types of parameters
     private String first_name, last_name, phone, email;
@@ -51,6 +53,12 @@ public class EditProfileFragment extends Fragment {
     public String[] getInformation(){
         return information;
     }
+
+    public Bitmap getBitmap() {
+        Bitmap userAvatar = avatarService.loadImageFromInternalStorage(getContext(), "avatar.png");
+        return userAvatar;
+    }
+
     public interface OnFragmentInteractionListener {
         void onFragmentBack();
         void onFragmentSaveChanges();
@@ -62,14 +70,13 @@ public class EditProfileFragment extends Fragment {
     public EditProfileFragment() {
         // Required empty public constructor
     }
-    public static EditProfileFragment newInstance(String param1, String param2, String param3, String param4, Integer id_image) {
+    public static EditProfileFragment newInstance(String param1, String param2, String param3, String param4) {
         EditProfileFragment fragment = new EditProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         args.putString(ARG_PARAM3, param3);
         args.putString(ARG_PARAM4, param4);
-        args.putInt(ARG_PARAM5, id_image);
         fragment.setArguments(args);
         return fragment;
     }
@@ -95,7 +102,7 @@ public class EditProfileFragment extends Fragment {
         EditText edit_last_name = view.findViewById(R.id.edit_last_name);
         EditText edit_phone = view.findViewById(R.id.edit_phone);
         EditText edit_email = view.findViewById(R.id.edit_email);
-        ImageView image_account = view.findViewById(R.id.image_Account);
+        image_account = view.findViewById(R.id.image_Account);
         ImageButton image_edit = view.findViewById(R.id.edit_avatar);
 
         ImageButton back = view.findViewById(R.id.button_back_account);
@@ -106,12 +113,11 @@ public class EditProfileFragment extends Fragment {
         edit_phone.setText(phone);
         edit_email.setText(email);
 
-        AvatarService avatarService = new AvatarService();
+        image_account.setImageResource(R.drawable.avatar);
 
         Bitmap userAvatar = avatarService.loadImageFromInternalStorage(getContext(), "avatar.png");
         if (userAvatar != null) image_account.setImageBitmap(userAvatar);
         else image_account.setImageResource(R.drawable.avatar);
-
         imagePickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -138,7 +144,6 @@ public class EditProfileFragment extends Fragment {
                 information[2] = edit_phone.getText().toString();
                 information[3] = edit_email.getText().toString();
                 information[4] = String.valueOf(id_image);
-
                 avatarService.copyImage(getContext(), "avatar_unsaved.png", "avatar.png");
                 mListener.onFragmentSaveChanges();
             }
@@ -152,6 +157,11 @@ public class EditProfileFragment extends Fragment {
             }
         });
         return view;
+    }
+    public void setAvatar() {
+        Bitmap userAvatar = avatarService.loadImageFromInternalStorage(getContext(), "avatar.png");
+        if (userAvatar != null) image_account.setImageBitmap(userAvatar);
+        else image_account.setImageResource(R.drawable.avatar);
     }
 }
 

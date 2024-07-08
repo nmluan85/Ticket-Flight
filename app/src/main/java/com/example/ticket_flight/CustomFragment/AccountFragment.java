@@ -1,6 +1,7 @@
 package com.example.ticket_flight.CustomFragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +39,7 @@ public class AccountFragment extends Fragment{
     private String last_name = "Nguyen";
     private String phone = "0987654321";
     private String email = "luan@gmail.com";
-    private Integer id_image = R.drawable.avatar;
+    ImageView image_account;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -63,7 +64,6 @@ public class AccountFragment extends Fragment{
             last_name = getArguments().getString(ARG_PARAM2);
             phone = getArguments().getString(ARG_PARAM3);
             email = getArguments().getString(ARG_PARAM4);
-            id_image = getArguments().getInt(ARG_PARAM5);
         }
         
     }
@@ -77,7 +77,7 @@ public class AccountFragment extends Fragment{
         TextView payment = view.findViewById(R.id.text_payment);
         TextView saved = view.findViewById(R.id.text_saved);
         TextView settings = view.findViewById(R.id.text_settings);
-        ImageView image_account = view.findViewById(R.id.image_Account);
+        image_account = view.findViewById(R.id.image_Account);
         ImageButton exit = view.findViewById(R.id.button_end_session);
 
         name.setText(first_name + " " + last_name);
@@ -93,7 +93,7 @@ public class AccountFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 EditProfileFragment editProfileFragment = EditProfileFragment
-                        .newInstance(first_name, last_name, phone, email, id_image);
+                        .newInstance(first_name, last_name, phone, email);
                 editProfileFragment.setOnFragmentInteractionListener(new EditProfileFragment.OnFragmentInteractionListener() {
                     @Override
                     public void onFragmentBack() {
@@ -109,11 +109,8 @@ public class AccountFragment extends Fragment{
                         last_name = information[1];
                         phone = information[2];
                         email = information[3];
-                        id_image = Integer.parseInt(information[4]);
-
+                        getBitmap(editProfileFragment.getBitmap());
                         name.setText(first_name + " " + last_name);
-                        image_account.setImageResource(id_image);
-
                         onFragmentBack();
                     }
                 });
@@ -124,5 +121,13 @@ public class AccountFragment extends Fragment{
             }
         });
         return view;
+    }
+    public void getBitmap(Bitmap image){
+        if (image != null){
+            image_account.setImageBitmap(image);
+        } else {
+            image_account.setImageResource(R.drawable.avatar);
+        }
+
     }
 }
