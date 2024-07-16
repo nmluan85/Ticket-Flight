@@ -193,9 +193,10 @@ public class SelectSeatFragment extends Fragment {
                 currentSeatType = rowSeatItems.get(position).getSelectedSeatType();
                 currentSeatDetail = "Traveller " + String.valueOf(currentTraveller + 1) + " / " + String.valueOf(currentSeat_index + 1) + currentSeatType.name();
                 text_your_seat.setText(currentSeatDetail);
-                /*text_total_price.setText("$" + String.valueOf(totalPrice()));*/
+
                 rowSeatAdapter.updateSateSeat();
-                TravellerItem item = travellerItems.get(position);
+
+                TravellerItem item = travellerItems.get(currentTraveller);
                 item.setRowNum(String.valueOf(currentSeat_index + 1));
                 item.setColumnName(currentSeatType);
             }
