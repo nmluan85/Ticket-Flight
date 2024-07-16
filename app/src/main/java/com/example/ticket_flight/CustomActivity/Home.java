@@ -43,6 +43,7 @@ public class Home extends AppCompatActivity {
     private EditText search_bar;
     private ImageButton search_button;
 
+    private TextView homeText, bookingText, notificationText, accountText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -62,10 +63,15 @@ public class Home extends AppCompatActivity {
         final ImageView notificationIcon = findViewById(R.id.icon_notification);
         final ImageView accountIcon = findViewById(R.id.icon_account);
 
-        final TextView homeText = findViewById(R.id.text_home);
+        /*final TextView homeText = findViewById(R.id.text_home);
         final TextView bookingText = findViewById(R.id.text_booking);
         final TextView notificationText = findViewById(R.id.text_notification);
-        final TextView accountText = findViewById(R.id.text_account);
+        final TextView accountText = findViewById(R.id.text_account);*/
+
+        homeText = findViewById(R.id.text_home);
+        bookingText = findViewById(R.id.text_booking);
+        notificationText = findViewById(R.id.text_notification);
+        accountText = findViewById(R.id.text_account);
 
         ImageButton button_trips = findViewById(R.id.button_trips);
         ImageButton button_hotel = findViewById(R.id.button_hotel);
@@ -265,7 +271,6 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 if (selectedTab != 1){
                     HomeFragment homeFragment = new HomeFragment();
-                    loadFragment(homeFragment);
 
                     bookingText.setVisibility(View.GONE);
                     notificationText.setVisibility(View.GONE);
@@ -279,6 +284,21 @@ public class Home extends AppCompatActivity {
                     homeLayout.setBackgroundResource(R.drawable.active);
 
                     selectedTab = 1;
+                    homeFragment.setTextView(homeLayout, bookingLayout, notificationLayout, accountLayout, homeText, bookingText, notificationText, accountText);
+                    homeFragment.setOnFragmentInteractionListener(new HomeFragment.OnFragmentInteractionListener() {
+                        @Override
+                        public void onFragmentBack() {
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .remove(homeFragment)
+                                    .commit();
+                        }
+                        @Override
+                        public void onFragmentSaveChanges() {
+
+                        }
+                    });
+                    loadFragment(homeFragment);
                 }
             }
         });
@@ -300,7 +320,6 @@ public class Home extends AppCompatActivity {
 
                     bookingText.setVisibility(View.VISIBLE);
                     bookingLayout.setBackgroundResource(R.drawable.active);
-
                     selectedTab = 2;
                 }
             }

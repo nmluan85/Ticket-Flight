@@ -33,6 +33,15 @@ public class BookingFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public interface OnFragmentInteractionListener {
+        void onFragmentBack();
+        void onFragmentSaveChanges();
+        void onFragmentBackSuccess();
+    }
+    private OnFragmentInteractionListener mListener;
+    public void setOnFragmentInteractionListener(OnFragmentInteractionListener listener) {
+        mListener = listener;
+    }
     public BookingFragment() {
         // Required empty public constructor
     }

@@ -33,12 +33,20 @@ public class HomeFragment extends Fragment {
     private LinearLayout homeLayout;
     private LinearLayout bookingLayout;
     private LinearLayout notificationLayout;
-    private LinearLayout accountLayout;;
+    private LinearLayout accountLayout;
 
     private TextView homeText;
     private TextView bookingText;
     private TextView notificationText;
     private TextView accountText;
+    public interface OnFragmentInteractionListener {
+        void onFragmentBack();
+        void onFragmentSaveChanges();
+    }
+    private OnFragmentInteractionListener mListener;
+    public void setOnFragmentInteractionListener(OnFragmentInteractionListener listener) {
+        mListener = listener;
+    }
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -80,7 +88,6 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -90,14 +97,6 @@ public class HomeFragment extends Fragment {
         ImageButton button_hotel = view.findViewById(R.id.button_hotel);
         ImageButton button_transport = view.findViewById(R.id.button_transport);
         ImageButton button_events = view.findViewById(R.id.button_events);
-
-        homeText.setVisibility(View.GONE);
-        notificationText.setVisibility(View.GONE);
-        accountText.setVisibility(View.GONE);
-
-        homeLayout.setBackgroundResource(R.drawable.non_active);
-        notificationLayout.setBackgroundResource(R.drawable.non_active);
-        accountLayout.setBackgroundResource(R.drawable.non_active);
 
         button_trips.setOnClickListener(new View.OnClickListener() {
             @Override
