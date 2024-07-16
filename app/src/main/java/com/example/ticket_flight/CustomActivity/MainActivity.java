@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
         animateFlight();
     }
     private void animateFlight(){
-        /*final float startX = vector.getX();
-        final float endX = vector.getX() + loading.getWidth();*/
 
         final float startX = 10;
         final float endX = 760;

@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.widget.SearchView;
 
@@ -40,6 +41,7 @@ import java.util.List;
 public class Home extends AppCompatActivity {
     private int selectedTab = 1;
     private RelativeLayout bottom_navigation_bar;
+    private ConstraintLayout home_layout;
     private EditText search_bar;
     private ImageButton search_button;
 
@@ -49,6 +51,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        home_layout = findViewById(R.id.constraint_layout_home);
         bottom_navigation_bar = findViewById(R.id.include_layout);
         search_bar = findViewById(R.id.editText_search);
         search_button = findViewById(R.id.imageButton);
@@ -62,11 +65,6 @@ public class Home extends AppCompatActivity {
         final ImageView bookingIcon = findViewById(R.id.icon_booking);
         final ImageView notificationIcon = findViewById(R.id.icon_notification);
         final ImageView accountIcon = findViewById(R.id.icon_account);
-
-        /*final TextView homeText = findViewById(R.id.text_home);
-        final TextView bookingText = findViewById(R.id.text_booking);
-        final TextView notificationText = findViewById(R.id.text_notification);
-        final TextView accountText = findViewById(R.id.text_account);*/
 
         homeText = findViewById(R.id.text_home);
         bookingText = findViewById(R.id.text_booking);
@@ -102,6 +100,8 @@ public class Home extends AppCompatActivity {
                                 .beginTransaction()
                                 .remove(tripsBookingFragment)
                                 .commit();
+                        home_layout.setVisibility(View.VISIBLE);
+
                         bookingText.setVisibility(View.GONE);
                         notificationText.setVisibility(View.GONE);
                         accountText.setVisibility(View.GONE);
@@ -123,6 +123,7 @@ public class Home extends AppCompatActivity {
                         .replace(R.id.fragmentContainer, tripsBookingFragment)
                         .addToBackStack(null)
                         .commit();
+                home_layout.setVisibility(View.GONE);
             }
         });
         button_hotel.setOnClickListener(new View.OnClickListener() {
@@ -146,6 +147,8 @@ public class Home extends AppCompatActivity {
                                 .beginTransaction()
                                 .remove(hotelBookingFragment)
                                 .commit();
+                        home_layout.setVisibility(View.VISIBLE);
+
                         bookingText.setVisibility(View.GONE);
                         notificationText.setVisibility(View.GONE);
                         accountText.setVisibility(View.GONE);
@@ -167,6 +170,7 @@ public class Home extends AppCompatActivity {
                         .replace(R.id.fragmentContainer, hotelBookingFragment)
                         .addToBackStack(null)
                         .commit();
+                home_layout.setVisibility(View.GONE);
             }
         });
         button_transport.setOnClickListener(new View.OnClickListener() {
@@ -190,6 +194,8 @@ public class Home extends AppCompatActivity {
                                 .beginTransaction()
                                 .remove(transportBookingFragment)
                                 .commit();
+                        home_layout.setVisibility(View.VISIBLE);
+
                         bookingText.setVisibility(View.GONE);
                         notificationText.setVisibility(View.GONE);
                         accountText.setVisibility(View.GONE);
@@ -220,6 +226,7 @@ public class Home extends AppCompatActivity {
                         .replace(R.id.fragmentContainer, transportBookingFragment, "TransportBookingFragment")
                         .addToBackStack(null)
                         .commit();
+                home_layout.setVisibility(View.GONE);
             }
         });
         button_events.setOnClickListener(new View.OnClickListener() {
@@ -243,6 +250,8 @@ public class Home extends AppCompatActivity {
                                 .beginTransaction()
                                 .remove(eventsBookingFragment)
                                 .commit();
+                        home_layout.setVisibility(View.VISIBLE);
+
                         bookingText.setVisibility(View.GONE);
                         notificationText.setVisibility(View.GONE);
                         accountText.setVisibility(View.GONE);
@@ -264,6 +273,7 @@ public class Home extends AppCompatActivity {
                         .replace(R.id.fragmentContainer, eventsBookingFragment)
                         .addToBackStack(null)
                         .commit();
+                home_layout.setVisibility(View.GONE);
             }
         });
         homeLayout.setOnClickListener(new View.OnClickListener() {
@@ -292,6 +302,7 @@ public class Home extends AppCompatActivity {
                                     .beginTransaction()
                                     .remove(homeFragment)
                                     .commit();
+                            home_layout.setVisibility(View.VISIBLE);
                         }
                         @Override
                         public void onFragmentSaveChanges() {
@@ -299,6 +310,7 @@ public class Home extends AppCompatActivity {
                         }
                     });
                     loadFragment(homeFragment);
+                    home_layout.setVisibility(View.GONE);
                 }
             }
         });
@@ -352,6 +364,8 @@ public class Home extends AppCompatActivity {
                 if (selectedTab != 4){
                     AccountFragment accountFragment = new AccountFragment();
                     loadFragment(accountFragment);
+
+                    home_layout.setVisibility(View.GONE);
 
                     bookingText.setVisibility(View.GONE);
                     notificationText.setVisibility(View.GONE);

@@ -48,12 +48,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:paddingStart="5dp"
-                android:text="Home"
-                android:textSize="16sp"
+                android:paddingStart="2dp"
+                android:layout_marginTop="2dp"
+                android:text="Home      "
+                android:textSize="12sp"
                 android:visibility="gone" />
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/bookingLayout"
             android:layout_width="wrap_content"
@@ -79,9 +79,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:paddingStart="5dp"
+                android:paddingStart="2dp"
+                android:layout_marginTop="2dp"
                 android:text="Booking            "
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:visibility="gone" />
         </LinearLayout>
 
@@ -110,9 +111,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:paddingStart="5dp"
+                android:paddingStart="2dp"
+                android:layout_marginTop="2dp"
                 android:text="Notification               "
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:visibility="gone" />
         </LinearLayout>
 
@@ -128,23 +130,22 @@
             android:paddingTop="5dp"
             android:paddingEnd="5dp"
             android:paddingBottom="5dp">
-
             <ImageView
                 android:id="@+id/icon_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:src="@drawable/icon_account" />
-
             <TextView
                 android:id="@+id/text_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:paddingStart="5dp"
+                android:paddingStart="2dp"
+                android:layout_marginTop="2dp"
                 android:text="Account              "
-                android:textSize="16sp"
-                android:visibility="gone" />
+                android:textSize="12sp"
+                android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
